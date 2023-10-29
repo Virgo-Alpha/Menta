@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Management Interface</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #6A0DAD;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            background-color: #8A3DE8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+         .modal-content {
+        color: black; /* Set text color to black */
+        /* Add other CSS styles as needed */
+    }
+    </style>
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Database Management Interface</h1>
+
+        <!-- Student CRUD -->
+        <div class="form-group">
+            <h2>Create Student</h2>
+            <form id="createStudentForm" method="POST">
+                <div class="form-group">
+                    <label for="studentName">Name:</label>
+                    <input type="text" class="form-control" id="studentName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentId">Student ID:</label>
+                    <input type="text" class="form-control" id="studentId" name="studentId" required>
+                </div>
+                <!-- Add more student fields here -->
+                <button type="submit" class="btn btn-primary">Create Student</button>
+            </form>
+
+            <div id="createStudentSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+                Student created successfully!
+            </div>
+<script>
+    document.getElementById('createStudentForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Gather student data from the form
+        const studentData = {
+            name: document.getElementById('studentName').value,
+            studentId: document.getElementById('studentId').value,
+            // Add more fields as needed
+        };
+
+        // Make an AJAX request to create a student
+        fetch('/students', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(studentData),
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                // Request was successful; display the success message
+                const createStudentSuccessMessage = document.getElementById('createStudentSuccessMessage');
+                createStudentSuccessMessage.innerHTML = 'Student created successfully!';
+                createStudentSuccessMessage.style.display = 'block';
+            } else {
+                // Request failed; you can handle errors here
+                createStudentSuccessMessage.innerHTML = 'Student not created successfully!';
+                createStudentSuccessMessage.style.display = 'block';
+                console.error('Error creating student:', response.statusText);
+            }
+        })
+        .catch((error) => {
+            console.error('Error creating student:', error);
+        });
+
+        // Clear the form (if needed)
+        this.reset();
+    });
+</script>
+        </div>
+
+<div class="form-group">
+    <h2>Retrieve Student</h2>
+    <form id="retrieveStudentForm" method="GET">
+        <label for="retrieveStudentID">Student ID:</label>
+        <input type="text" class="form-control" id="retrieveStudentID" name="id" required>
+        <button type="submit" class="btn btn-primary">Retrieve Student</button>
+    </form>
+
+    <!-- Modal container -->
+    <div id="studentModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Retrieved Student</h2>
+            <div id="retrievedStudentInfoModal"></div>
+            <div id="retrieveStudentErrorModal"></div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('retrieveStudentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const studentId = document.getElementById('retrieveStudentID').value;
+            const retrieveStudentError = document.getElementById('retrieveStudentErrorModal');
+
+            // Hide any previous error messages
+            retrieveStudentError.style.display = 'none';
+
+            // Make an AJAX request to retrieve the student by ID using jQuery
+            $.ajax({
+                method: 'GET',
+                url: `/students/${studentId}`, // The URL to your "Retrieve a student by ID" route
+                success: function (student) {
+                    const retrievedStudentInfoModal = document.getElementById('retrievedStudentInfoModal');
+                    retrievedStudentInfoModal.innerHTML = `Student Name: ${student.name}<br>Student ID: ${student.studentId}`;
+                    retrievedStudentInfoModal.style.display = 'block';
+
+                    // Show the modal
+                    const modal = document.getElementById('studentModal');
+                    modal.style.display = 'block';
+                },
+                error: function () {
+                    // Handle errors, e.g., if the student is not found
+                    retrieveStudentError.innerHTML = 'Student not found.';
+                    retrieveStudentError.style.display = 'block';
+                }
+            });
+        });
+
+        // Close modal button
+        document.getElementById('closeModal').addEventListener('click', function () {
+            // Hide the modal
+            const modal = document.getElementById('studentModal');
+            modal.style.display = 'none';
+        });
+    </script>
+</div>
+
+<div class="form-group">
+    <h2>Update Student</h2>
+    <form id="updateStudentForm" method="PUT">
+        <label for="updateStudentID">Student ID:</label>
+        <input type="text" class="form-control" id="updateStudentID" name="id" required>
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name">
+        <label for="major">Major:</label>
+        <input type="text" class="form-control" id="major" name="major">
+        <label for="enrollmentYear">Enrollment Year:</label>
+        <input type="number" class="form-control" id="enrollmentYear" name="enrollmentYear">
+        <label for="gradYear">Graduation Year:</label>
+        <input type="text" class="form-control" id="gradYear" name="gradYear">
+        <label for="gender">Gender:</label>
+        <input type="text" class="form-control" id="gender" name="gender">
+        <label for="yearOfBirth">Year of Birth:</label>
+        <input type="text" class="form-control" id="yearOfBirth" name="yearOfBirth">
+        <label for="studentEmail">Student Email:</label>
+        <input type="email" class="form-control" id="studentEmail" name="studentEmail">
+        <!-- Add more fields to update here -->
+
+        <button type="submit" class="btn btn-primary">Update Student</button>
+    </form>
+</div>
+
+<!-- Display update success message here -->
+<div id="updateStudentSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+    Student updated successfully!
+</div>
+
+<script>
+    document.getElementById('updateStudentForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const studentId = document.getElementById('updateStudentID').value;
+        const form = document.getElementById('updateStudentForm'); // Get the form element
+
+        const updatedStudentData = {};
+
+        // Define an array of field IDs to update
+        const fieldsToUpdate = [
+            'name',
+            'major',
+            'enrollmentYear',
+            'gradYear',
+            'gender',
+            'yearOfBirth',
+            'studentEmail',
+        ];
+
+        fieldsToUpdate.forEach((fieldId) => {
+            const value = document.getElementById(fieldId).value;
+            if (value.trim() !== '') {
+                updatedStudentData[fieldId] = value;
+            }
+        });
+
+        $.ajax({
+            method: 'PUT',
+            url: `/students/${studentId}`, // The URL to your "Update a student by ID" route
+            data: updatedStudentData,
+            success: function () {
+                const updateStudentSuccessMessage = document.getElementById('updateStudentSuccessMessage');
+                updateStudentSuccessMessage.innerHTML = `Student with ID ${studentId} updated successfully.`;
+                updateStudentSuccessMessage.style.display = 'block';
+
+                // Reset the form to clear the fields
+                form.reset();
+            },
+            error: function () {
+                const updateStudentSuccessMessage = document.getElementById('updateStudentSuccessMessage');
+                updateStudentSuccessMessage.innerHTML = `Failed to update student with ID ${studentId}.`;
+                updateStudentSuccessMessage.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<div class="form-group">
+    <h2>Delete Student</h2>
+    <form id="deleteStudentForm" method="DELETE">
+        <label for="deleteStudentID">Student ID:</label>
+        <input type="text" class="form-control" id="deleteStudentID" name="id" required>
+        <button type="submit" class="btn btn-danger">Delete Student</button>
+    </form>
+
+    <div id="deleteStudentSuccessMessage" style="display: none;" class="alert alert-warning mt-3">
+        Student with ID: <span id="deletedStudentID"></span> deleted.
+    </div>
+
+    <script>
+        document.getElementById('deleteStudentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const studentId = document.getElementById('deleteStudentID').value;
+            // Make an AJAX request to delete the student by ID using jQuery
+            $.ajax({
+                method: 'DELETE',
+                url: `/students/${studentId}`, // The URL to your "Delete a student by ID" route
+                success: function () {
+                    const deleteStudentSuccessMessage = document.getElementById('deleteStudentSuccessMessage');
+                    const deletedStudentID = document.getElementById('deletedStudentID');
+                    deletedStudentID.innerHTML = studentId;
+                    deleteStudentSuccessMessage.style.display = 'block';
+
+                    form.reset();
+                },
+                error: function () {
+                    // Handle errors, e.g., if the student is not found
+                    const deleteStudentSuccessMessage = document.getElementById('deleteStudentSuccessMessage');
+                    deleteStudentSuccessMessage.innerHTML = 'Failed to delete student.';
+                    deleteStudentSuccessMessage.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</div>
+
+        <!-- Mentor CRUD -->
+<div class="form-group">
+    <h2>Create Mentor</h2>
+    <form id="createMentorForm" method="POST">
+        <div class="form-group">
+            <label for="mentorName">Name:</label>
+            <input type="text" class="form-control" id="mentorName" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="mentorAge">Age:</label>
+            <input type="number" class="form-control" id="mentorAge" name="age" required>
+        </div>
+        <!-- Add more mentor fields here -->
+        <button type="submit" class="btn btn-primary">Create Mentor</button>
+    </form>
+
+    <div id="createMentorSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+        Mentor created successfully!
+    </div>
+
+    <script>
+        document.getElementById('createMentorForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather mentor data from the form
+            const mentorData = {
+                name: document.getElementById('mentorName').value,
+                age: document.getElementById('mentorAge').value,
+                // Add more mentor fields as needed
+            };
+
+            // Make an AJAX request to create a mentor
+            fetch('/mentors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(mentorData),
+            })
+                .then((response) => {
+                    if (response.status === 200) {
+                        // Request was successful; display the success message
+                        document.getElementById('createMentorSuccessMessage').style.display = 'block';
+                        form.reset();
+                    } else {
+                        // Request failed; you can handle errors here
+                        document.getElementById('createMentorSuccessMessage').innerHTML = 'Mentor not created successfully!';
+                        document.getElementById('createMentorSuccessMessage').style.display = 'block';
+                        console.error('Error creating mentor:', response.statusText);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error creating mentor:', error);
+                });
+
+            // Clear the form (if needed)
+            this.reset();
+        });
+    </script>
+</div>
+
+<div class="form-group">
+    <h2>Retrieve Mentor</h2>
+    <form id="retrieveMentorForm" method="GET">
+        <label for="retrieveMentorName">Name:</label>
+        <input type="text" class="form-control" id="retrieveMentorName" name="name" required>
+        <button type="button" class="btn btn-primary" id="retrieveMentorButton">Retrieve Mentor</button>
+    </form>
+</div>
+
+<!-- Modal for displaying mentor information -->
+<div id="mentorModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" id="closeMentorModal">&times;</span>
+        <h2>Retrieved Mentor</h2>
+        <div id="retrievedMentorInfoModal"></div>
+        <div id="retrieveMentorErrorModal"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('retrieveMentorButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        const mentorName = document.getElementById('retrieveMentorName').value;
+        const mentorModal = document.getElementById('mentorModal');
+
+        // Hide any previous error messages
+        const retrieveMentorErrorModal = document.getElementById('retrieveMentorErrorModal');
+        retrieveMentorErrorModal.style.display = 'none';
+
+        // Make an AJAX request to retrieve the mentor by name
+        $.ajax({
+            method: 'GET',
+            url: `/mentors/${mentorName}`, // The URL to your "Retrieve a mentor by name" route
+            success: function (mentor) {
+                // Display the retrieved mentor's information in the modal
+                const retrievedMentorInfoModal = document.getElementById('retrievedMentorInfoModal');
+                retrievedMentorInfoModal.innerHTML = `Name: ${mentor.name}<br>Age: ${mentor.age}`; // Add more mentor fields as needed
+
+                // Show the modal
+                mentorModal.style.display = 'block';
+            },
+            error: function () {
+                // Handle errors, e.g., if the mentor is not found
+                retrieveMentorErrorModal.innerHTML = 'Mentor not found.';
+                retrieveMentorErrorModal.style.display = 'block';
+            }
+        });
+    });
+
+    // Close modal button
+    document.getElementById('closeMentorModal').addEventListener('click', function () {
+        // Hide the modal
+        const mentorModal = document.getElementById('mentorModal');
+        mentorModal.style.display = 'none';
+    });
+</script>
+
+<div class="form-group">
+    <h2>Update Mentor</h2>
+    <form action="/mentors/update" method="PUT">
+        <label for="updateMentorName">Name:</label>
+        <input type="text" class a="form-control" id="updateMentorName" name="name" required>
+        <label for="age">Age:</label>
+        <input type="number" class="form-control" id="age" name="age">
+        <label for="profession">Profession:</label>
+        <input type="text" class="form-control" id="profession" name="profession">
+        <label for="industry">Industry:</label>
+        <input type="text" class="form-control" id="industry" name="industry">
+        <label for="gradYear">Graduation Year:</label>
+        <input type="text" class="form-control" id="gradYear" name="gradYear">
+        <label for="gender">Gender:</label>
+        <input type="text" class="form-control" id="gender" name="gender">
+        <!-- Add more fields to update here -->
+
+        <button type="submit" class="btn btn-primary">Update Mentor</button>
+    </form>
+</div>
+
+<!-- Display update success message here -->
+<div id="updateMentorSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+    Mentor updated successfully!
+</div>
+
+<script>
+    document.getElementById('updateMentorName').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const mentorName = document.getElementById('updateMentorName').value;
+        const form = document.getElementById('updateMentorName'); // Get the form element
+
+        const updatedMentorData = {};
+
+        // Define an array of field IDs to update
+        const fieldsToUpdate = [
+            'age',
+            'profession',
+            'industry',
+            'gradYear',
+            'gender',
+        ];
+
+        fieldsToUpdate.forEach((fieldId) => {
+            const value = document.getElementById(fieldId).value;
+            if (value.trim() !== '') {
+                updatedMentorData[fieldId] = value;
+            }
+        });
+
+        $.ajax({
+            method: 'PUT',
+            url: `/mentors/${mentorName}`, // The URL to your "Update a mentor by name" route
+            data: updatedMentorData,
+            success: function () {
+                const updateMentorSuccessMessage = document.getElementById('updateMentorSuccessMessage');
+                updateMentorSuccessMessage.innerHTML = `Mentor ${mentorName} updated successfully.`;
+                updateMentorSuccessMessage.style.display = 'block';
+
+                // Reset the form to clear the fields
+                form.reset();
+            },
+            error: function () {
+                const updateMentorSuccessMessage = document.getElementById('updateMentorSuccessMessage');
+                updateMentorSuccessMessage.innerHTML = `Failed to update mentor ${mentorName}.`;
+                updateMentorSuccessMessage.style display = 'block';
+            }
+        });
+    });
+</script>
+
+<div class="form-group">
+    <h2>Delete Mentor</h2>
+    <form id="deleteMentorForm" method="POST">
+        <label for="deleteMentorName">Name:</label>
+        <input type="text" class="form-control" id="deleteMentorName" name="name" required>
+        <button type="button" class="btn btn-danger" id="deleteMentorButton">Delete Mentor</button>
+    </form>
+</div>
+
+<!-- Modal for confirming mentor deletion -->
+<div id="confirmDeleteModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" id="closeConfirmDeleteModal">&times;</span>
+        <h2>Confirm Mentor Deletion</h2>
+        <p>Are you sure you want to delete this mentor?</p>
+        <button id="confirmDeleteButton" class="btn btn-danger">Confirm Deletion</button>
+        <button id="cancelDeleteButton" class="btn btn-secondary">Cancel</button>
+    </div>
+</div>
+
+<!-- Modal for displaying delete success message -->
+<div id="deleteSuccessModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Mentor Deleted</h2>
+        <p>The mentor has been successfully deleted.</p>
+        <button id="closeDeleteSuccessModal" class="btn btn-primary">OK</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('deleteMentorButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        const mentorName = document.getElementById('deleteMentorName').value;
+
+        // Show the confirmation modal
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        confirmDeleteModal.style.display = 'block';
+
+        // Handle confirmation of mentor deletion
+document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+    const mentorName = document.getElementById('deleteMentorName').value;
+
+    fetch(`/mentors/${mentorName}`, {
+        method: 'DELETE',
+    })
+    .then((response) => {
+        if (response.status === 200) {
+            // Upon successful deletion, show the delete success modal
+            const deleteSuccessModal = document.getElementById('deleteSuccessModal');
+            const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+            confirmDeleteModal.style.display = 'none';
+            deleteSuccessModal.style.display = 'block';
+        } else {
+            // Handle errors here, e.g., mentor not found
+            console.error('Mentor deletion failed:', response.statusText);
+        }
+    })
+    .catch((error) => {
+        // Handle errors here
+        console.error('Error deleting mentor:', error);
+    });
+});
+
+        // Handle canceling mentor deletion
+        document.getElementById('cancelDeleteButton').addEventListener('click', function () {
+            confirmDeleteModal.style.display = 'none';
+        });
+    });
+
+    // Close confirmation modal
+    document.getElementById('closeConfirmDeleteModal').addEventListener('click', function () {
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        confirmDeleteModal.style.display = 'none';
+    });
+
+    // Close delete success modal
+    document.getElementById('closeDeleteSuccessModal').addEventListener('click', function () {
+        const deleteSuccessModal = document.getElementById('deleteSuccessModal');
+        deleteSuccessModal.style.display = 'none';
+    });
+</script>
+
+        <!-- Session CRUD -->
+<div class="form-group">
+    <h2>Create Session</h2>
+    <form id="createSessionForm" method="POST">
+        <div class="form-group">
+            <label for="sessionMentorName">Mentor Name:</label>
+            <input type="text" class="form-control" id="sessionMentorName" name="mentorName" required>
+        </div>
+        <div class="form-group">
+            <label for="sessionMenteeName">Mentee Name:</label>
+            <input type="text" class a="form-control" id="sessionMenteeName" name="menteeName" required>
+        </div>
+        <div class="form-group">
+            <label for="sessionDate">Date:</label>
+            <input type="text" class="form-control" id="sessionDate" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="sessionTime">Time:</label>
+            <input type="text" class="form-control" id="sessionTime" name="time" required>
+        </div>
+        <div class="form-group">
+            <label for="sessionCategory">Category:</label>
+            <input type="text" class="form-control" id="sessionCategory" name="category" required>
+        </div>
+        <!-- Add more session fields here -->
+        <button type="submit" class="btn btn-primary">Create Session</button>
+    </form>
+
+    <div id="createSessionSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+        Session created successfully!
+    </div>
+
+    <script>
+        document.getElementById('createSessionForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const mentorName = document.getElementById('sessionMentorName').value;
+            const menteeName = document.getElementById('sessionMenteeName').value;
+            const date = document.getElementById('sessionDate').value;
+            const time = document.getElementById('sessionTime').value;
+            const category = document.getElementById('sessionCategory').value;
+
+            // Prepare the data to send
+            const sessionData = {
+                mentorName,
+                menteeName,
+                date,
+                time,
+                category
+            };
+
+            // Make an AJAX request to create the session
+            $.ajax({
+                method: 'POST',
+                url: '/sessions', // The URL to your "Create a new session" route
+                data: sessionData,
+                success: function (session) {
+                    // Display the success message
+                    const createSessionSuccessMessage = document.getElementById('createSessionSuccessMessage');
+                    createSessionSuccessMessage.style.display = 'block';
+
+                    // Clear the form
+                    document.getElementById('createSessionForm').reset();
+                },
+                error: function () {
+                    // Handle errors, e.g., if the session creation fails
+                    // You can display an error message or handle it as needed
+                }
+            });
+        });
+    </script>
+</div>
+
+<div class="form-group">
+    <h2>Retrieve Session</h2>
+    <form id="retrieveSessionForm" method="GET">
+        <label for="sessionID">Session ID:</label>
+        <input type="text" class="form-control" id="sessionID" name="id" required>
+        <button type="button" class="btn btn-primary" id="retrieveSessionButton">Retrieve Session</button>
+    </form>
+
+    <!-- Display retrieved session info here -->
+    <div id="retrievedSessionInfo" style="display: none;">
+        <h2>Retrieved Session</h2>
+        <div class="alert alert-info" id="sessionInfo"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('retrieveSessionButton').addEventListener('click', function () {
+        const sessionID = document.getElementById('sessionID').value;
+        const sessionInfo = document.getElementById('sessionInfo');
+
+        // Make an AJAX request to retrieve the session by ID
+        $.ajax({
+            method: 'GET',
+            url: `/sessions/${sessionID}`, // The URL to your "Retrieve a session by ID" route
+            success: function (session) {
+                // Display the retrieved session's information
+                sessionInfo.innerHTML = `Mentor: ${session.mentorName}<br>Mentee: ${session.menteeName}<br>Date: ${session.date}<br>Time: ${session.time}<br>Category: ${session.category}`;
+                document.getElementById('retrievedSessionInfo').style.display = 'block';
+            },
+            error: function () {
+                // Handle errors, e.g., if the session is not found
+                sessionInfo.innerHTML = 'Session not found.';
+                document.getElementById('retrievedSessionInfo').style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<div class="form-group">
+    <h2>Update Session</h2>
+    <form id="updateSessionForm" method="POST">
+        <label for="updateSessionID">Session ID:</label>
+        <input type="text" class="form-control" id="updateSessionID" name="id" required>
+        <!-- Add fields to update here -->
+        <button type="button" class="btn btn-primary" id="updateSessionButton">Update Session</button>
+    </form>
+
+    <!-- Display update success message here -->
+    <div id="updateSessionSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+        Session updated successfully!
+    </div>
+</div>
+
+<script>
+    document.getElementById('updateSessionButton').addEventListener('click', function () {
+        const sessionID = document.getElementById('updateSessionID').value;
+        const updateSessionSuccessMessage = document.getElementById('updateSessionSuccessMessage');
+
+        // Here, you can make an AJAX request to update the session by ID
+        $.ajax({
+            method: 'PUT',
+            url: `/sessions/${sessionID}`, // The URL to your "Update a session by ID" route
+            data: {
+                // Include the fields you want to update
+                // Example:
+                // field1: updatedValue1,
+                // field2: updatedValue2,
+                // ...
+            },
+            success: function (updatedSession) {
+                // Handle the updated session data as needed
+                updateSessionSuccessMessage.innerHTML = `Session with ID ${sessionID} updated successfully.`;
+                updateSessionSuccessMessage.style.display = 'block';
+            },
+            error: function () {
+                // Handle errors, e.g., if the session is not found
+                updateSessionSuccessMessage.innerHTML = `Error updating session with ID ${sessionID}.`;
+                updateSessionSuccessMessage.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<div class="form-group">
+    <h2>Delete Session</h2>
+    <form id="deleteSessionForm" method="POST">
+        <label for="deleteSessionID">Session ID:</label>
+        <input type="text" class="form-control" id="deleteSessionID" name="id" required>
+        <button type="button" class="btn btn-danger" id="deleteSessionButton">Delete Session</button>
+    </form>
+
+    <!-- Modal for confirming the session deletion -->
+    <div class="modal" id="deleteSessionModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeDeleteSessionModal">&times;</span>
+            <h2>Delete Session</h2>
+            <p>Are you sure you want to delete Session with ID: <span id="deletedSessionID"></span>?</p>
+            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Yes, Delete</button>
+        </div>
+    </div>
+
+    <!-- Display deleted session ID here -->
+    <div id="deleteSessionSuccessMessage" style="display: none;" class="alert alert-warning mt-3">
+        Session with ID: <span id="deletedSessionIDText"></span> deleted.
+    </div>
+</div>
+
+<script>
+    document.getElementById('deleteSessionButton').addEventListener('click', function () {
+        const sessionID = document.getElementById('deleteSessionID').value;
+        const deletedSessionID = document.getElementById('deletedSessionID');
+        deletedSessionID.innerHTML = sessionID;
+        
+        // Show the delete confirmation modal
+        const deleteSessionModal = document.getElementById('deleteSessionModal');
+        deleteSessionModal.style.display = 'block';
+    });
+
+    // Close the delete session modal
+    document.getElementById('closeDeleteSessionModal').addEventListener('click', function () {
+        const deleteSessionModal = document.getElementById('deleteSessionModal');
+        deleteSessionModal.style.display = 'none';
+    });
+
+    // Handle confirmation of session deletion
+    document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+        const sessionID = document.getElementById('deletedSessionID').innerHTML;
+        const deletedSessionIDText = document.getElementById('deletedSessionIDText');
+        deletedSessionIDText.innerHTML = sessionID;
+
+        // Here you can make an AJAX request to delete the session
+        // Upon successful deletion, show the delete success message
+        const deleteSuccessMessage = document.getElementById('deleteSessionSuccessMessage');
+        deleteSessionModal.style.display = 'none';
+        deleteSuccessMessage.style.display = 'block';
+
+        // Clear the form
+        document.getElementById('deleteSessionID').value = '';
+    });
+</script>
+
+
+</body>
+</html>
