@@ -385,9 +385,9 @@
 
 <div class="form-group">
     <h2>Update Mentor</h2>
-    <form action="/mentors/update" method="PUT">
+    <form method="PUT" id="updateMentorForm">
         <label for="updateMentorName">Name:</label>
-        <input type="text" class a="form-control" id="updateMentorName" name="name" required>
+        <input type="text" class="form-control" id="updateMentorName" name="name" required>
         <label for="age">Age:</label>
         <input type="number" class="form-control" id="age" name="age">
         <label for="profession">Profession:</label>
@@ -410,10 +410,10 @@
 </div>
 
 <script>
-    document.getElementById('updateMentorName').addEventListener('submit', function (event) {
+    document.getElementById('updateMentorForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const mentorName = document.getElementById('updateMentorName').value;
-        const form = document.getElementById('updateMentorName'); // Get the form element
+        const form = document.getElementById('updateMentorForm'); // Get the form element
 
         const updatedMentorData = {};
 
@@ -443,12 +443,12 @@
                 updateMentorSuccessMessage.style.display = 'block';
 
                 // Reset the form to clear the fields
-                form.reset();
+                // form.reset();
             },
             error: function () {
                 const updateMentorSuccessMessage = document.getElementById('updateMentorSuccessMessage');
                 updateMentorSuccessMessage.innerHTML = `Failed to update mentor ${mentorName}.`;
-                updateMentorSuccessMessage.style display = 'block';
+                updateMentorSuccessMessage.style.display = 'block';
             }
         });
     });
