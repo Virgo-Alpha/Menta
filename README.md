@@ -2,6 +2,14 @@
 
 [Short project description]
 
+- Link to [report](https/example.com)
+
+- Link to [Live site](https/example.com)
+
+- Link to [video](https/example.com)
+
+- Link to [slide deck](https/example.com)
+
 ## Features
 
 - Feature 1: [Description]

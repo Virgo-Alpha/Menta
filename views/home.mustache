@@ -134,8 +134,12 @@
                 },
                 error: function () {
                     // Handle errors, e.g., if the student is not found
+                    const retrieveStudentError = document.getElementById('retrieveStudentErrorModal');
                     retrieveStudentError.innerHTML = 'Student not found.';
                     retrieveStudentError.style.display = 'block';
+
+                    const modal = document.getElementById('studentModal');
+                    modal.style.display = 'block';
                 }
             });
         });
@@ -369,8 +373,11 @@
             },
             error: function () {
                 // Handle errors, e.g., if the mentor is not found
-                retrieveMentorErrorModal.innerHTML = 'Mentor not found.';
+                const retrieveMentorErrorModal = document.getElementById('retrieveMentorErrorModal');
                 retrieveMentorErrorModal.style.display = 'block';
+
+                // Show the modal
+                mentorModal.style.display = 'block';
             }
         });
     });
