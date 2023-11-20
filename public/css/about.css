@@ -1,0 +1,255 @@
+/* Custom CSS */
+header {
+    background-color: purple;
+}
+
+header ul {
+    margin: 0;
+    padding: 0 0 0 50%;
+    list-style: none;
+}
+
+header li {
+    display: inline-block;
+}
+
+header li a {
+    padding: 25px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #c3c3c3;
+}
+
+.img-fluid {
+    width: 100%;
+    height: 100%;
+}
+
+#AboutUs {
+    padding: 10%;
+    font-size: larger;
+}
+
+.founder {
+    border-radius: 50%;
+    width: 400px;
+    height:400px;
+}
+
+/* ? footer {
+    background-color: black;
+} */
+
+h4, h3 {
+    text-align: center;
+    /*border-bottom: solid 1px black;*/
+    text-decoration: double;
+}
+
+#ContactUs {
+    background-color: #000000;
+    color: aliceblue;
+    padding-bottom: 50px;
+}
+
+form {
+    background-color: #284b63;
+    width: max-content;
+    margin: auto;
+    padding: 50px;
+    color: #000000;
+}
+
+footer {
+    background: #353535;
+    padding: 32px 0;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+}
+
+.flex-parent {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-parent2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-parent2 img {
+    width: 480px;
+    height:320px;
+    border: #000000 solid 1px;
+}
+
+.flex-parent2 div {
+    padding: 30px;
+}
+
+.flex-parent2 p {
+    text-align: center;
+    padding: 50px 50px;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer li {
+    display: block;
+    margin-top: 25px;
+}
+
+footer li a {
+    padding: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #c3c3c3;
+}
+
+footer li a:hover {
+    color: white;
+}
+
+#footer1, #footer2 {
+    width: 50%;
+}
+
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    /* Styles for smaller screens */
+    .row.justify-content-center {
+        flex-direction: column;
+        text-align: center;
+    }
+    .col-md-4.text-center.mb-4 {
+        margin-bottom: 20px;
+    }
+
+    .btn{
+        display: none;
+    }
+
+    .btn-main {
+        display: inline;
+    }
+
+    header ul {
+        margin: 0;
+        padding: 0 0 0 5%;
+        list-style: none;
+    }
+    
+    header li {
+        display: inline;
+    }
+    
+    header li a {
+        padding: 5px;
+        font-size: 14px;
+        text-decoration: none;
+        color: #c3c3c3;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin: 0 0 8px 0;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    section {
+        padding: 25px 0 15px 0;
+    }
+
+    footer {
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .flex-parent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+
+    footer li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    footer div {
+        margin-bottom: 0;
+    }
+
+    #email2{
+        margin-bottom: 15px;
+    }
+
+    #lname-label, #email-label {
+        display: block;
+    }
+
+    .flex-parent2 {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .flex-parent2 img {
+        width: 350px;
+        height:200px;
+    }
+    
+    .flex-parent2 div {
+        padding: 10px;
+    }
+    
+    .flex-parent2 p {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    section {
+        padding: 25px 0 15px 0;
+    }
+
+    .founder {
+        border-radius: 50%;
+        width: 300px;
+        height:300px;
+        margin: auto;
+    }
+
+    #email2{
+        margin-bottom: 15px;
+    }
+
+    #lname-label, #email-label {
+        display: block;
+    }
+
+    .mentees {
+        padding-top: 50px;
+        width: 100%;
+        height: 50%;
+    }
+
+    form {
+        width: 100%;
+        margin: auto;
+    }
+
+}
