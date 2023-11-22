@@ -27,6 +27,14 @@ router.delete('/mentors/:name', mentorController.delete);
 // Sessions Routes
 router.post('/sessions', sessionController.create);
 router.get('/sessions', sessionController.findSessions);
+router.post('/sessions/:id', sessionController.findById);
+router.post('/sessions/:name', sessionController.findByName);
+router.post('/sessions/:name', sessionController.findByMentee);
+router.post('/sessions/:name', sessionController.findByMentor);
+router.post('/sessions/:category', sessionController.findByCategory);
+router.post('/sessions/:time', sessionController.findByTime);
+router.post('/sessions/:category', sessionController.findByCategory);
+router.put('/sessions/:id', sessionController.update);
 router.delete('/sessions/:id', sessionController.delete);
 
 module.exports = router;
