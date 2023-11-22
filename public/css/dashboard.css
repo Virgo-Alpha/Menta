@@ -1,0 +1,65 @@
+/* Styles for the footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Adjust padding as needed */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: purple;
+    /*background-color: black;
+    color: white;
+    text-align: center; */
+    padding: 0; /* Adjust padding as needed */
+    border-bottom: black 1px solid;
+}
+
+.main-content {
+    display: flex;
+}
+
+/* Styles for the sidebar */
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 175px; /* Adjust the width as needed */
+    background-color: purple;
+    color: white;
+    left: 0; /* Align sidebar to the left */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    font-size: 16px; /* Adjust font size as needed */
+    padding-top: 20px; /* Adjust top padding as needed */
+    flex: 0 0 auto; /* Ensure the sidebar doesn't grow or shrink */
+    /* Add any other styles or adjustments here */
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 50px 0;
+    margin: 0;
+}
+.sidebar ul li {
+    padding: 10px;
+}
+.sidebar ul li:hover {
+    background-color: #4b0082; /* Change color on hover */
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    margin-left: 175px; /* Adjust content width by adding the same value as the sidebar's width */
+    padding: 100px 10px;
+    display: inline-block;
+    flex: 1;
+}

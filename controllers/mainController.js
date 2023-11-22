@@ -3,6 +3,16 @@ const mainController = {
     renderHomePage: (req, res) => {
       res.render('about'); // Assuming you have a "home.mustache" template for the homepage
     },
+
+    // render student dashboard
+    renderStudentDashboard: (req, res) => {
+        res.render('student_dashboard');
+    },
+
+    // render mentor dashboard
+    renderAdminDashboard: (req, res) => {
+        res.render('admin_dashboard');
+    }
   };
   
 module.exports = mainController;

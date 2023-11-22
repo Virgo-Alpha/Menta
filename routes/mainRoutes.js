@@ -9,6 +9,8 @@ const sessionController = require('../controllers/sessionController');
 
 // Route for the homepage ("/")
 router.get('/', mainController.renderHomePage);
+router.get('/student_dashboard', mainController.renderStudentDashboard);
+router.get('/admin_dashboard', mainController.renderAdminDashboard);
 
 // Students Routes
 router.post('/students', studentController.create);

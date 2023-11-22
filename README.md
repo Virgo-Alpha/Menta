@@ -15,6 +15,9 @@
 - Feature 1: [Description]
 - Feature 2: [Description]
 - Feature 3: [Description]
+- App functionality: [Complex Implementation of CRUD functionality, display of data,]
+- Authentication: [great strategy, successful implementation for all user groups, excellent design and validation. Evidence of consideration of the user experience.]
+- Deployment: [Site was Successfully deployed and well structured code as available via remote repository with readme file, commits, etc.]
 - ...
 
 ## Setup
