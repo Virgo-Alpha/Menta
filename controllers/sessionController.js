@@ -31,21 +31,6 @@ const sessionController = {
     });
   },
 
-//   findSessions: (req, res) => {
-//     const _id = req.query.id; // Updated to use the "id" query parameter
-
-//     Session.findById(_id, (err, session) => {
-//         if (err) {
-//             res.status(500).json({ error: 'Could not find the session.' });
-//         } else if (!session) {
-//             res.status(404).json({ error: 'Session not found.' });
-//         } else {
-//             res.json(session);
-//         }
-//     });
-// },
-
-
   // Update a session
   update: (req, res) => {
     const sessionID = req.params.id; // Get session ID from the request parameters
