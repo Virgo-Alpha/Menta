@@ -58,7 +58,7 @@ header {
 }
 
 .content {
-    margin-left: 175px; /* Adjust content width by adding the same value as the sidebar's width */
+    margin-left: 50px; /* Adjust content width by adding the same value as the sidebar's width */
     padding: 100px 10px;
     display: inline-block;
     flex: 1;

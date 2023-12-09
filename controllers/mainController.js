@@ -6,12 +6,17 @@ const mainController = {
 
     // render student dashboard
     renderStudentDashboard: (req, res) => {
-        res.render('student_dashboard');
+        res.render('student_views/student_dashboard');
     },
 
     // render mentor dashboard
     renderAdminDashboard: (req, res) => {
-        res.render('admin_dashboard');
+        res.render('admin_views/admin_dashboard');
+    },
+
+    // render admin sessions view
+    renderAdminSessions: (req, res) => {
+        res.render('admin_views/admin_sessions');
     }
   };
   
