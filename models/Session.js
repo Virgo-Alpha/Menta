@@ -3,8 +3,7 @@ const Datastore = require('nedb');
 const sessionDB = new Datastore({ filename: './data/sessions.db', autoload: true });
 
 class Session {
-  constructor(mentorName, menteeList, sessionName, date, startTime, endTime, venue, category, active, id) {
-    this.mentorName = mentorName;
+  constructor(sessionName, date, startTime, endTime, venue, category, menteeList, active, mandatory, id) {
     this.menteeList = menteeList;
     this.sessionName = sessionName;
     this.date = new Date(date);
@@ -14,20 +13,11 @@ class Session {
     this.category = category;
     this.active = active;
     this.id = id;
+    this.mandatory = mandatory;
   }
 
   static findAll(callback) {
     sessionDB.find({}, (err, sessions) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, sessions);
-      }
-    });
-  }
-
-  static findByMentor(mentorName, callback) {
-    sessionDB.find({ mentorName }, (err, sessions) => {
       if (err) {
         callback(err);
       } else {
@@ -101,9 +91,8 @@ class Session {
     });
   }
 
-  static update(sessionID, mentorName, menteeList, sessionName, date, startTime, endTime, venue, category, active, callback) {
+  static update(sessionID, menteeList, sessionName, date, startTime, endTime, venue, category, active, callback) {
     const updateData = {
-      mentorName,
       menteeList,
       sessionName,
       date: new Date(date),
@@ -111,6 +100,7 @@ class Session {
       endTime,
       venue,
       category,
+      mandatory: false,
       active
     };
 

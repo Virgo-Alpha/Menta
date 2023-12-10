@@ -1,0 +1,98 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+            <div class="content">
+            
+            <div class="container">
+        <h1 class="text-center">Adding a session</h1>
+
+        <!-- Session CRUD -->
+        <div class="form-group">
+            <h2>Create Session</h2>
+            <form id="createSessionForm" method="POST" action="/add_session">
+                <div class="form-group">
+                    <label for="sessionName">Session Name:</label>
+                    <input type="text" class="form-control" id="sessionName" name="sessionName" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionDate">Date:</label>
+                    <input type="date" class="form-control" id="sessionDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionTime">Start Time:</label>
+                    <input type="time" class="form-control" id="sessionTime" name="startTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionEndTime">End Time:</label>
+                    <input type="time" class="form-control" id="sessionEndTime" name="EndTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="sessionCategory">Category:</label>
+                    <select class="form-control" id="sessionCategory" name="category" required>
+                        <option value="Career advice">Career advice</option>
+                        <option value="Resume Review">Resume Review</option>
+                        <option value="Mock Interview">Mock Interview</option>
+                        <option value="Grad School">Grad School</option>
+                        <option value="Entrepreneurship">Entrepreneurship</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionVenue">Venue:</label>
+                    <input type="text" class="form-control" id="sessionVenue" name="venue">
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="active"> Active</label>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="mandatory"> Mandatory</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Session</button>
+            </form>
+
+            <!-- Success message -->
+            <div id="createSessionSuccessMessage" style="display: none;" class="alert alert-success mt-3">
+                Session created successfully!
+            </div>
+
+            <script>
+                document.getElementById('createSessionForm').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    // Get form data
+                    const formData = new FormData(this);
+
+                    // Make an AJAX request to create the session
+                    $.ajax({
+                        method: 'POST',
+                        url: '/add_session',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (session) {
+                            // Display the success message
+                            const createSessionSuccessMessage = document.getElementById('createSessionSuccessMessage');
+                            createSessionSuccessMessage.style.display = 'block';
+
+                            // Clear the form
+                            document.getElementById('createSessionForm').reset();
+                        },
+                        error: function () {
+                            // Handle errors
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}

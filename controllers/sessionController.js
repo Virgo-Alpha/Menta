@@ -3,8 +3,8 @@ const Session = require('../models/Session');
 const sessionController = {
   // Create a new session
   create: (req, res) => {
-    const { mentorName, menteeName, date, startTime, endTime, category, venue, active } = req.body;
-    const newSession = new Session(mentorName, menteeName, date, startTime, endTime, category, venue, active);
+    const { sessionName, date, startTime, endTime, category, venue, active, mandatory } = req.body;
+    const newSession = new Session(sessionName, date, startTime, endTime, category, venue, active, mandatory);
 
     Session.create(newSession, (err, session) => {
       if (err) {
@@ -67,19 +67,6 @@ const sessionController = {
     });
   },
 
-  // Find session by Mentor
-findByMentor: (req, res) => {
-  const mentorName = req.query.mentorName;
-
-  Session.findByMentor(mentorName, (err, sessions) => {
-    if (err) {
-      res.status(500).json({ error: 'Could not find sessions.' });
-    } else {
-      res.json(sessions);
-    }
-  });
-},
-
 // Find session by Mentee
 findByMentee: (req, res) => {
   const menteeName = req.query.menteeName;
@@ -106,12 +93,12 @@ findByCategory: (req, res) => {
   });
 },
 
-  // Update a session by ID
+  // ! Update a session by ID
   update: (req, res) => {
     const sessionID = req.params.id; // Get session ID from the request parameters
-    const { mentorName, menteeName, date, time, category } = req.body;
+    const { sessionName, date, time, category, mandatory} = req.body;
 
-    Session.update(sessionID, mentorName, menteeName, date, time, category, (err, updatedSession) => {
+    Session.update(sessionID, sessionName, date, time, category, mandatory, (err, updatedSession) => {
       if (err) {
         res.status(500).json({ error: 'Could not update the session.' });
       } else {

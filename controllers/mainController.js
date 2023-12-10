@@ -17,6 +17,11 @@ const mainController = {
     // render admin sessions view
     renderAdminSessions: (req, res) => {
         res.render('admin_views/admin_sessions');
+    },
+
+    // render add_session
+    renderAddSession: (req, res) => {
+        res.render('admin_views/add_session');
     }
   };
   
