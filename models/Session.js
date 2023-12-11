@@ -3,7 +3,7 @@ const Datastore = require('nedb');
 const sessionDB = new Datastore({ filename: './data/sessions.db', autoload: true });
 
 class Session {
-  constructor(sessionName, date, startTime, endTime, category,  venue, mandatory, menteeList, active) {
+  constructor(sessionName, date, startTime, endTime, category,  venue, mandatory, menteeList) {
     this.sessionName = sessionName;
     this.date = new Date(date);
     this.startTime = startTime;
@@ -11,8 +11,7 @@ class Session {
     this.category = category;
     this.venue = venue;
     this.mandatory = mandatory;
-    this.menteeList = menteeList | [];
-    this.active = active | "On";    
+    this.menteeList = menteeList | [];    
   }
 
   static findAll(callback) {
@@ -75,21 +74,6 @@ class Session {
     });
   }
 
-  static checkAndUpdateActiveSessions(callback) {
-    sessionDB.update(
-      { date: { $lt: new Date() }, active: true },
-      { $set: { active: false } },
-      { multi: true },
-      (err, numReplaced) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null, numReplaced);
-        }
-      }
-    );
-  }
-
   static create(session, callback) {
     sessionDB.insert(session, (err, newSession) => {
       if (err) {
@@ -100,19 +84,7 @@ class Session {
     });
   }
 
-  static update(sessionID, menteeList, sessionName, date, startTime, endTime, venue, category, active, callback) {
-    const updateData = {
-      menteeList,
-      sessionName,
-      date: new Date(date),
-      startTime,
-      endTime,
-      venue,
-      category,
-      mandatory: false,
-      active
-    };
-
+  static update(updateData, sessionID, callback) {
     sessionDB.update({ _id: sessionID }, { $set: updateData }, {}, (err, numReplaced) => {
       if (err) {
         callback(err);
@@ -121,12 +93,12 @@ class Session {
           if (err) {
             callback(err);
           } else {
-            callback(null, updatedSession);
+            callback(null, updatedSession); // Pass the updated session to the callback
           }
         });
       }
     });
-  }
+  }  
 
   static delete(sessionId, callback) {
     sessionDB.remove({ id: sessionId }, {}, (err, numRemoved) => {
@@ -136,6 +108,16 @@ class Session {
         callback(null, null); // Session not found
       } else {
         callback(null, { _id: sessionId });
+      }
+    });
+  }
+
+  static deleteAll(callback) {
+    sessionDB.remove({}, { multi: true }, (err, numRemoved) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, numRemoved);
       }
     });
   }

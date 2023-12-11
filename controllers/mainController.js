@@ -43,17 +43,47 @@ const mainController = {
         res.status(500).json({ error: 'Could not find the session.' });
       } else {
         // Render the session details page and pass session data to Mustache template
-        res.render('admin_views/edit_session', { 
+        res.render('admin_views/edit_session', {
             sessionName: session.sessionName,
             date: session.date,
             startTime: session.startTime,
             endTime: session.endTime,
             category: session.category,
             venue: session.venue,
+            mandatory: session.mandatory,
             sessionId: sessionId // Pass sessionId for edit session URL
         });
       }
     });
+  },
+
+  // Delete a session by ID
+  delete: (req, res) => {
+    const sessionId = req.params.id;
+
+    Session.delete(sessionId, (err) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not delete the session.' });
+      } else {
+        // Redirect to admin sessions view
+        res.redirect('/admin_sessions');
+      }
+    }
+    );
+  },
+
+  // Delete all sessions
+  deleteAll: (req, res) => {
+    Session.deleteAll((err) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not delete all sessions.' });
+      } else {
+        // Redirect to admin sessions view and send ok status
+        res.status(200).json({ message: 'OK' });
+        
+      }
+    }
+    );
   },
 
   };

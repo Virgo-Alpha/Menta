@@ -29,10 +29,11 @@ router.delete('/mentors/:name', mentorController.delete);
 router.get('/add_session', mainController.renderAddSession);
 
 router.post('/add_session', sessionController.create);
-router.get('/edit_session/:id', mainController.renderEditSession); // !
+router.get('/edit_session/:id', mainController.renderEditSession);
+router.post('/edit_session/:id', sessionController.update); // !
+router.delete('/admin_sessions', mainController.deleteAll); // !
 
 router.get('/sessions', sessionController.findSessions);
-router.post('/sessions/:id', sessionController.findById);
 router.post('/sessions/:name', sessionController.findByName);
 router.post('/sessions/:name', sessionController.findByMentee);
 router.post('/sessions/:category', sessionController.findByCategory);
