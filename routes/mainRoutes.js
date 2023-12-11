@@ -36,6 +36,7 @@ router.delete('/admin_sessions/:id', sessionController.delete);
 router.get('/search_sessions', mainController.initialSearch);
 router.post('/search_sessions', mainController.searchSessions);
 
+// ! Not yet used
 router.get('/sessions', sessionController.findSessions);
 router.post('/sessions/:name', sessionController.findByName);
 router.post('/sessions/:name', sessionController.findByMentee);

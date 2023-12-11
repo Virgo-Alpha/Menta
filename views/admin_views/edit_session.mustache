@@ -8,7 +8,7 @@
     <main class="main-content">
     {{> admin_views/admin_sidebar}}
             <div class="content">
-            <p display='None'>{{sessionId}}</p>
+            <p style="display: none">{{sessionId}}</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -32,7 +32,7 @@
                 </tbody>
             </table>
             <button id="deleteSessionBtn" class="btn btn-danger">Delete Session</button>
-
+            <a href="/admin_sessions" class="btn btn-primary">Cancel</a>
             <hr>
 
             <!-- Edit Session Form -->
@@ -72,6 +72,7 @@
                     <label><input type="checkbox" name="mandatory"> Mandatory</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Update Session</button>
+                <a href="/admin_sessions" class="btn btn-primary">Cancel</a>
             </form>
         </div>
         </div>
