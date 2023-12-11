@@ -14,6 +14,32 @@ class Session {
     this.menteeList = menteeList | [];    
   }
 
+  static create(session, callback) {
+    sessionDB.insert(session, (err, newSession) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, newSession);
+      }
+    });
+  }
+
+  static update(updateData, sessionID, callback) {
+    sessionDB.update({ _id: sessionID }, { $set: updateData }, {}, (err, numReplaced) => {
+      if (err) {
+        callback(err);
+      } else {
+        sessionDB.findOne({ _id: sessionID }, (err, updatedSession) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, updatedSession); // Pass the updated session to the callback
+          }
+        });
+      }
+    });
+  }
+
   static findAll(callback) {
     sessionDB.find({}, (err, sessions) => {
       if (err) {
@@ -23,6 +49,43 @@ class Session {
       }
     });
   }
+
+  static delete(sessionId, callback) {
+    sessionDB.remove({ _id: sessionId }, {}, (err, numRemoved) => {
+      if (err) {
+        callback(err);
+      } else if (numRemoved === 0) {
+        callback(null, null); // Session not found
+      } else {
+        callback(null, { _id: sessionId });
+      }
+    });
+  }
+
+  static deleteAll(callback) {
+    sessionDB.remove({}, { multi: true }, (err, numRemoved) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, numRemoved);
+      }
+    });
+  }
+
+  static search(sessionName, categories, callback) {
+    const query = {
+        sessionName: { $regex: new RegExp(sessionName, 'i') },
+        category: { $in: categories }
+    };
+
+    sessionDB.find(query, (err, sessions) => {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, sessions);
+        }
+    });
+}
 
   static findByMentee(menteeName, callback) {
     sessionDB.find({ menteeList: menteeName }, (err, sessions) => {
@@ -70,54 +133,6 @@ class Session {
         callback(err);
       } else {
         callback(null, sessions);
-      }
-    });
-  }
-
-  static create(session, callback) {
-    sessionDB.insert(session, (err, newSession) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, newSession);
-      }
-    });
-  }
-
-  static update(updateData, sessionID, callback) {
-    sessionDB.update({ _id: sessionID }, { $set: updateData }, {}, (err, numReplaced) => {
-      if (err) {
-        callback(err);
-      } else {
-        sessionDB.findOne({ _id: sessionID }, (err, updatedSession) => {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, updatedSession); // Pass the updated session to the callback
-          }
-        });
-      }
-    });
-  }  
-
-  static delete(sessionId, callback) {
-    sessionDB.remove({ id: sessionId }, {}, (err, numRemoved) => {
-      if (err) {
-        callback(err);
-      } else if (numRemoved === 0) {
-        callback(null, null); // Session not found
-      } else {
-        callback(null, { _id: sessionId });
-      }
-    });
-  }
-
-  static deleteAll(callback) {
-    sessionDB.remove({}, { multi: true }, (err, numRemoved) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, numRemoved);
       }
     });
   }

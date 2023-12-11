@@ -8,6 +8,7 @@
     <main class="main-content">
     {{> admin_views/admin_sidebar}}
             <div class="content">
+            <p display='None'>{{sessionId}}</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -30,6 +31,7 @@
                     </tr>
                 </tbody>
             </table>
+            <button id="deleteSessionBtn" class="btn btn-danger">Delete Session</button>
 
             <hr>
 
@@ -75,5 +77,35 @@
         </div>
         <!-- Your dynamic content goes here -->
     </main>
+    <script>
+    document.getElementById('deleteSessionBtn').addEventListener('click', function () {
+    // Show confirmation pop-up
+    const confirmDelete = confirm('Are you sure you want to delete {{sessionName}}?');
+
+    if (confirmDelete) {
+        // If "Proceed" is clicked
+        fetch('/admin_sessions/{{sessionId}}', {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle success, e.g., show a success message
+                alert('{{sessionName}} has been deleted.');
+                // render admin_sessions page
+                window.location.href = '/admin_sessions';
+            } else {
+                // Handle failure, e.g., show an error message
+                alert('Failed to delete session.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting session.');
+        });
+    }
+    // If "Cancel" is clicked, no action is taken
+});
+
+    </script>
 </body>
 {{> footer}}

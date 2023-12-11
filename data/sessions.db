@@ -1,2 +1,2 @@
-{"sessionName":"Test 3","date":{"$$date":1702252800000},"startTime":"11:44","endTime":"11:44","category":"Mock Interview","venue":"In Person","mandatory":"on","menteeList":0,"_id":"xi1SKnxNdBuY9R83"}
-{"sessionName":"Test 2","date":{"$$date":1702252800000},"startTime":"11:44","endTime":"11:44","category":"Career advice","venue":"In Person","mandatory":"on","menteeList":0,"_id":"xi1SKnxNdBuY9R83"}
+{"sessionName":"Tester","date":{"$$date":1702252800000},"startTime":"17:51","endTime":"17:51","category":"Entrepreneurship","venue":"Neverland","mandatory":"on","menteeList":0,"_id":"LMc0OzpqiuT5oPe5"}
+{"sessionName":"Test","date":{"$$date":1702252800000},"startTime":"21:02","endTime":"21:02","category":"Resume Review","venue":"Neversea","menteeList":0,"_id":"j8dG0miqphctZ0yi"}

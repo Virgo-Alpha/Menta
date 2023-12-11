@@ -83,7 +83,8 @@ const sessionController = {
       } else if (!deletedSession) {
         res.status(404).json({ error: 'Session not found.' });
       } else {
-        res.json(deletedSession);
+        // return 200
+        res.status(200).json({ message: 'OK' });
       }
     });
   },

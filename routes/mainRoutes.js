@@ -30,8 +30,11 @@ router.get('/add_session', mainController.renderAddSession);
 
 router.post('/add_session', sessionController.create);
 router.get('/edit_session/:id', mainController.renderEditSession);
-router.post('/edit_session/:id', sessionController.update); // !
-router.delete('/admin_sessions', mainController.deleteAll); // !
+router.post('/edit_session/:id', sessionController.update);
+router.delete('/admin_sessions', mainController.deleteAll);
+router.delete('/admin_sessions/:id', sessionController.delete);
+router.get('/search_sessions', mainController.initialSearch);
+router.post('/search_sessions', mainController.searchSessions);
 
 router.get('/sessions', sessionController.findSessions);
 router.post('/sessions/:name', sessionController.findByName);
