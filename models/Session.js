@@ -3,17 +3,16 @@ const Datastore = require('nedb');
 const sessionDB = new Datastore({ filename: './data/sessions.db', autoload: true });
 
 class Session {
-  constructor(sessionName, date, startTime, endTime, venue, category, menteeList, active, mandatory, id) {
-    this.menteeList = menteeList;
+  constructor(sessionName, date, startTime, endTime, category,  venue, mandatory, menteeList, active) {
     this.sessionName = sessionName;
     this.date = new Date(date);
     this.startTime = startTime;
     this.endTime = endTime;
-    this.venue = venue;
     this.category = category;
-    this.active = active;
-    this.id = id;
+    this.venue = venue;
     this.mandatory = mandatory;
+    this.menteeList = menteeList | [];
+    this.active = active | "On";    
   }
 
   static findAll(callback) {
@@ -42,6 +41,16 @@ class Session {
         callback(err);
       } else {
         callback(null, sessions);
+      }
+    });
+  }
+
+  static findById(sessionId, callback) {
+    sessionDB.findOne({ _id: sessionId }, (err, session) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, session);
       }
     });
   }

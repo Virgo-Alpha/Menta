@@ -1,5 +1,11 @@
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery UI library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         {{! <link href="/css/about.css" rel="stylesheet"> }}
 <link href="/css/dashboard.css" rel="stylesheet">
 </head>
@@ -10,7 +16,6 @@
             <div class="content">
             
             <div class="container">
-        <h1 class="text-center">Adding a session</h1>
 
         <!-- Session CRUD -->
         <div class="form-group">
@@ -21,20 +26,20 @@
                     <input type="text" class="form-control" id="sessionName" name="sessionName" required>
                 </div>
                 <div class="form-group">
-                    <label for="sessionDate">Date:</label>
-                    <input type="date" class="form-control" id="sessionDate" name="date" required>
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
                 </div>
                 <div class="form-group">
-                    <label for="sessionTime">Start Time:</label>
-                    <input type="time" class="form-control" id="sessionTime" name="startTime" required>
+                    <label for="startTime">Start Time:</label>
+                    <input type="time" class="form-control" id="startTime" name="startTime" required>
                 </div>
                 <div class="form-group">
-                    <label for="sessionEndTime">End Time:</label>
-                    <input type="time" class="form-control" id="sessionEndTime" name="EndTime" required>
+                    <label for="endTime">End Time:</label>
+                    <input type="time" class="form-control" id="endTime" name="endTime" required>
                 </div>
                 <div class="form-group">
-                    <label for="sessionCategory">Category:</label>
-                    <select class="form-control" id="sessionCategory" name="category" required>
+                    <label for="category">Category:</label>
+                    <select class="form-control" id="category" name="category" required>
                         <option value="Career advice">Career advice</option>
                         <option value="Resume Review">Resume Review</option>
                         <option value="Mock Interview">Mock Interview</option>
@@ -43,51 +48,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="sessionVenue">Venue:</label>
-                    <input type="text" class="form-control" id="sessionVenue" name="venue">
+                    <label for="venue">Venue:</label>
+                    <input type="text" class="form-control" id="venue" name="venue">
                 </div>
-                <div class="form-group">
+                {{! <div class="form-group">
                     <label><input type="checkbox" name="active"> Active</label>
-                </div>
+                </div> }}
                 <div class="form-group">
                     <label><input type="checkbox" name="mandatory"> Mandatory</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Session</button>
             </form>
-
-            <!-- Success message -->
-            <div id="createSessionSuccessMessage" style="display: none;" class="alert alert-success mt-3">
-                Session created successfully!
-            </div>
-
-            <script>
-                document.getElementById('createSessionForm').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    // Get form data
-                    const formData = new FormData(this);
-
-                    // Make an AJAX request to create the session
-                    $.ajax({
-                        method: 'POST',
-                        url: '/add_session',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (session) {
-                            // Display the success message
-                            const createSessionSuccessMessage = document.getElementById('createSessionSuccessMessage');
-                            createSessionSuccessMessage.style.display = 'block';
-
-                            // Clear the form
-                            document.getElementById('createSessionForm').reset();
-                        },
-                        error: function () {
-                            // Handle errors
-                        }
-                    });
-                });
-            </script>
         </div>
     </div>
 

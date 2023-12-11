@@ -14,34 +14,38 @@
     <a href="/delete_sessions" class="btn btn-danger">Delete Sessions</a>
     </div>
 
+    <p display='None'>{{_id}}</p>
+
     <table class="table">
         <thead>
             <tr>
                 <th>Session Name</th>
                 <th>Date</th>
                 <th>Time</th>
+                <th>Category</th>
                 <th>Venue</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <!-- {{#sessions}} -->
+            {{#sessions}}
             <tr>
                 <td>{{sessionName}}</td>
                 <td>{{date}}</td>
                 <td>{{startTime}} - {{endTime}}</td>
+                <td>{{category}}</td>
                 <td>{{venue}}</td>
                 <td>
-                    <button class="btn btn-info">Edit</button>
+                    <a href="/edit_session/{{_id}}" class="btn btn-info">Edit</a>
                 </td>
             </tr>
-            <!-- {{/sessions}} -->
+            {{/sessions}}
 
-            <!-- {{^sessions}} -->
+            {{^sessions}}
             <tr>
                 <td colspan="5">No sessions in the database.</td>
             </tr>
-            <!-- {{/sessions}} -->
+            {{/sessions}}
         </tbody>
     </table>
 

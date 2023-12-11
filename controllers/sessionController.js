@@ -3,14 +3,25 @@ const Session = require('../models/Session');
 const sessionController = {
   // Create a new session
   create: (req, res) => {
-    const { sessionName, date, startTime, endTime, category, venue, active, mandatory } = req.body;
-    const newSession = new Session(sessionName, date, startTime, endTime, category, venue, active, mandatory);
+    const { sessionName, date, startTime, endTime, category, venue, mandatory } = req.body;
+    const newSession = new Session(sessionName, date, startTime, endTime, category, venue, mandatory);
 
     Session.create(newSession, (err, session) => {
       if (err) {
         res.status(500).json({ error: 'Could not create a new session.' });
       } else {
-        res.json(session);
+        const sessionId = session._id; // Replace this with your actual sessionId variable
+
+            // Render the session details page and pass session data to Mustache template
+            res.render('admin_views/submittedSession', { 
+                sessionName: session.sessionName,
+                date: session.date,
+                startTime: session.startTime,
+                endTime: session.endTime,
+                category: session.category,
+                venue: session.venue,
+                sessionId: sessionId // Pass sessionId for edit session URL
+            });
       }
     });
   },

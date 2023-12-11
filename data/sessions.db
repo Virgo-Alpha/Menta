@@ -1,0 +1,4 @@
+{"menteeList":"on","sessionName":"A","date":{"$$date":1702252800000},"startTime":"09:30","endTime":"11:30","venue":"Grad School","category":"Online","_id":"FGgg73EfzawnA00K"}
+{"menteeList":"on","sessionName":"Test","date":{"$$date":1703894400000},"startTime":"11:34","endTime":"23:30","venue":"Mock Interview","category":"In Person","_id":"IWb6i5muG4FVk5Yj"}
+{"sessionName":"Test","date":{"$$date":1702080000000},"startTime":"11:40","endTime":"12:40","category":"Entrepreneurship","venue":"In Person","mandatory":"on","menteeList":0,"active":0,"_id":"faUz20SqPWzHuQIl"}
+{"menteeList":"on","sessionName":"Suck","date":{"$$date":1702339200000},"startTime":"23:40","endTime":"23:45","category":"Neverland","venue":"Entrepreneurship","_id":"tHD3jnDB0J5niBSJ"}

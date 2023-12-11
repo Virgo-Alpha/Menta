@@ -1,0 +1,58 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+            <div class="content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Session Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Category</th>
+                        <th>Venue</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#sessions}}
+                    <tr>
+                        <td>{{sessionName}}</td>
+                        <td>{{date}}</td>
+                        <td>{{startTime}} - {{endTime}}</td>
+                        <td>{{category}}</td>
+                        <td>{{venue}}</td>
+                        <td>
+                            <a href="/edit_session/{{ sessionId }}" class="btn btn-info">Edit</a>
+                        </td>
+                    </tr>
+                    {{/sessions}}
+
+                    {{^sessions}}
+                    <tr>
+                        <td colspan="5">No sessions in the database.</td>
+                    </tr>
+                    {{/sessions}}
+                </tbody>
+            </table>
+
+            <!-- Edit Session Form -->
+            <form id="editSessionForm" method="POST" action="/edit_session/{{ sessionId }}">
+                <div class="form-group">
+                    <label for="sessionName">Session Name:</label>
+                    <input type="text" class="form-control" id="sessionName" name="sessionName" required>
+                </div>
+                <!-- Other input fields for session details -->
+                <button type="submit" class="btn btn-primary">Update Session</button>
+            </form>
+        </div>
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}
