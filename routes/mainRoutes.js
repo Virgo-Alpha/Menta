@@ -12,8 +12,18 @@ router.get('/', mainController.renderHomePage);
 router.get('/student_dashboard', mainController.renderStudentDashboard);
 router.get('/admin_dashboard', mainController.renderAdminDashboard);
 router.get('/admin_sessions', mainController.renderAdminSessions);
+router.get('/admin_students', mainController.renderAdminStudents);
 
 // Students Routes
+router.get('/add_student', mainController.renderAddStudent);
+router.post('/add_student', studentController.create);
+// router.get('/edit_student/:id', mainController.renderEditStudent);
+// router.post('/edit_student/:id', studentController.update);
+router.delete('/admin_students', mainController.deleteAllStudents);
+// router.delete('/admin_students/:id', studentController.delete);
+router.get('/search_students', mainController.initialSearchStudents);
+router.post('/search_students', mainController.searchStudents);
+
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);
 router.put('/students/:id', studentController.update);

@@ -1,1 +1,3 @@
-{"name":"Benson Mugure","studentId":"1","_id":"dDTVKD7qlcje64ZA"}
+{"studentId":"3","firstName":"Reggie","lastName":"O","dateOfBirth":"1995-12-16","gender":"Other","studentEmail":"r.o@yahoo.com","enrollmentDate":"2023-12-12","degreeProgram":"Film making","goals":[],"sessions":[],"Age":28,"_id":"0I3vKSB8YzLwcZwo"}
+{"studentId":"2","firstName":"Ruth","lastName":"K","dateOfBirth":"2001-12-15","gender":"Female","studentEmail":"r.k@gmail.com","enrollmentDate":"2023-12-12","degreeProgram":"Electrical Engineering","goals":[],"sessions":[],"Age":22,"_id":"CY3I0FvUrDoOoIlv"}
+{"studentId":"1","firstName":"Benson","lastName":"Mugure","dateOfBirth":"2000-08-27","gender":"Male","studentEmail":"b.mugure@alustudent.com","enrollmentDate":"2023-12-01","degreeProgram":"Computing","goals":[],"sessions":[],"Age":23,"_id":"hS7eTPOc0VKqBcfb"}

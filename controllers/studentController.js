@@ -3,15 +3,36 @@ const Student = require('../models/Student');
 const studentController = {
   // Create a new student
   create: (req, res) => {
-    const { name, studentId, major, enrollmentYear, gradYear, gender, yearOfBirth, studentEmail } = req.body;
+    const { studentId, firstName, lastName, dateOfBirth, gender, studentEmail, enrollmentDate, degreeProgram } = req.body;
 
-    const newStudent = new Student(name, studentId, major, enrollmentYear, gradYear, gender, yearOfBirth, studentEmail);
+    const newStudent = new Student(studentId, firstName, lastName, dateOfBirth, gender, studentEmail, enrollmentDate, degreeProgram);
 
     Student.create(newStudent, (err, student) => {
       if (err) {
         res.status(500).json({ error: 'Could not create a new student.' });
       } else {
-        res.json(student);
+        // render the student details page and pass student data to Mustache template
+        res.render('admin_views/submittedStudent', {
+          studentId: student.studentId,
+          firstName: student.firstName,
+          lastName: student.lastName,
+          Age: student.Age,
+          gender: student.gender,
+          studentEmail: student.studentEmail,
+          enrollmentDate: student.enrollmentDate,
+          degreeProgram: student.degreeProgram,
+        });
+      }
+    });
+  },
+
+  // Find all students
+  findAll: (req, res) => {
+    Student.findAll((err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find students.' });
+      } else {
+        res.json(students);
       }
     });
   },

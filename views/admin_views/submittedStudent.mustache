@@ -1,0 +1,32 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+            <div class="content">
+            <div class="container mt-5">
+                <h2>Student created successfully:</h2>
+                <p><strong>Student ID:</strong> {{ studentId }}</p>
+                <p><strong>First Name:</strong> {{ firstName }}</p>
+                <p><strong>Last Name:</strong> {{ lastName }}</p>
+                <p><strong>Age:</strong> {{ Age }}</p>
+                <p><strong>Gender:</strong> {{ gender }}</p>
+                <p><strong>Email:</strong> {{ studentEmail }}</p>
+                <p><strong>Enrollment Year:</strong> {{ enrollmentDate }}</p>
+                <p><strong>Degree Program:</strong> {{ degreeProgram }}</p>
+
+                <!-- Buttons to view all students and edit current student -->
+                <div class="mt-3">
+                    <a href="/admin_students" class="btn btn-primary">View All Students</a>
+                    <a href="/edit_student/{{ studentId }}" class="btn btn-secondary">Edit Student</a>
+                </div>
+            </div>
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}
