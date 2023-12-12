@@ -13,6 +13,7 @@ const studentController = {
       } else {
         // render the student details page and pass student data to Mustache template
         res.render('admin_views/submittedStudent', {
+          student_id: student._id,
           studentId: student.studentId,
           firstName: student.firstName,
           lastName: student.lastName,
@@ -56,14 +57,36 @@ const studentController = {
 
   // Update a student's information
   update: (req, res) => {
-    const studentId = req.params.id;
-    const updatedStudent = req.body;
+    const student_id = req.params.id;
+    const { studentId, firstName, lastName, dateOfBirth, gender, studentEmail, enrollmentDate, degreeProgram } = req.body;
 
-    Student.update(studentId, updatedStudent, (err, numReplaced) => {
+    // ! Check for empty values before updating
+    const updateData = {};
+    if (studentId) updateData.studentId = studentId;
+    if (firstName) updateData.firstName = firstName;
+    if (lastName) updateData.lastName = lastName;
+    if (dateOfBirth) updateData.dateOfBirth = dateOfBirth;
+    if (gender) updateData.gender = gender;
+    if (studentEmail) updateData.studentEmail = studentEmail;
+    if (enrollmentDate) updateData.enrollmentDate = enrollmentDate;
+    if (degreeProgram) updateData.degreeProgram = degreeProgram;
+
+    Student.update(student_id, updateData, (err, updatedStudent) => {
       if (err) {
         res.status(500).json({ error: 'Could not update the student.' });
       } else {
-        res.json({ message: 'Student updated successfully', numReplaced });
+        // render the updated student details page
+        res.render('admin_views/updatedStudent', {
+          student_id: updatedStudent._id,
+          studentId: updatedStudent.studentId,
+          firstName: updatedStudent.firstName,
+          lastName: updatedStudent.lastName,
+          Age: updatedStudent.Age,
+          gender: updatedStudent.gender,
+          studentEmail: updatedStudent.studentEmail,
+          enrollmentDate: updatedStudent.enrollmentDate,
+          degreeProgram: updatedStudent.degreeProgram,
+        });
       }
     });
   },
@@ -80,6 +103,9 @@ const studentController = {
       }
     });
   },
+
+  // Delete all students
+
 };
 
 module.exports = studentController;

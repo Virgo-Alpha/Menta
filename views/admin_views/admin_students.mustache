@@ -13,7 +13,7 @@
                 <a href="/search_students" class="btn btn-secondary">Search Students</a>
                 <button id="deleteStudentsBtn" class="btn btn-danger">Delete Students</button>
             </div>
-
+            <p display='None'>{{_id}}</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -38,7 +38,7 @@
                         <td>{{enrollmentDate}}</td>
                         <td>{{degreeProgram}}</td>
                         <td>
-                            <a href="/edit_student/{{studentId}}" class="btn btn-info">Edit</a>
+                            <a href="/edit_student/{{_id}}" class="btn btn-info">Edit</a>
                         </td>
                     </tr>
                     {{/students}}

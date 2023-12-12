@@ -9,7 +9,7 @@
     {{> admin_views/admin_sidebar}}
             <div class="content">
             <!-- Example search bar -->
-<form id="searchForm">
+
     <!-- Example search bar -->
     <input type="text" id="firstName" placeholder="student's firstName">
     <input type="text" id="lastName" placeholder="student's lastName">
@@ -22,7 +22,7 @@
     <label for="medicine">Medicine</label>
     <input type="checkbox" id="medicine" name="degreeProgram" value="Medicine">
     <label for="engineering">Engineering</label>
-    <input type="checkbox" id="engineering" name="degreeProgram" value="Engineering">
+    <input type="checkbox" id="engineering" name="degreeProgram" value="Electrical Engineering">
     <label for="filmMaking">Film Making</label>
     <input type="checkbox" id="filmMaking" name="degreeProgram" value="Film making">
     <label for="business">Business Management</label>
@@ -31,7 +31,7 @@
 
     <button type="submit" id="searchButton" class="btn btn-primary">Search</button>
     <a href="/admin_students" class="btn btn-danger">Cancel</a>
-</form>
+
 
 
             <hr>
@@ -61,7 +61,7 @@
                         <td>{{enrollmentDate}}</td>
                         <td>{{degreeProgram}}</td>
                         <td>
-                            <a href="/edit_student/{{studentId}}" class="btn btn-info">Edit</a>
+                            <a href="/edit_student/{{_id}}" class="btn btn-info">Edit</a>
                         </td>
                     </tr>
                     {{/students}}
@@ -75,83 +75,77 @@
             </table>
 
             <script>
-    // Fetch all students and render on form submission
-    document.getElementById('searchForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        fetchStudents();
-    });
+            // Fetch all students and render on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchStudents();
+            });
 
-    // Function to fetch students based on form input
-    function fetchStudents() {
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
+                function fetchStudents() {
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
 
-        const degreePrograms = [];
-        document.querySelectorAll('input[name="degreeProgram"]:checked').forEach(program => {
-            degreePrograms.push(program.value);
-        });
+                    const degreePrograms = [];
+                    document.querySelectorAll('input[name="degreeProgram"]:checked').forEach(program => {
+                        degreePrograms.push(program.value);
+                    });
 
-        // Construct the URL with the selected criteria
-        const url = `/search_students?firstName=${firstName}&lastName=${lastName}&degreePrograms=${degreePrograms.join(',')}`;
+                    const url = `/search_students?firstName=${firstName}&lastName=${lastName}&degreePrograms=${degreePrograms.join(',')}`;
 
-        // Fetch students using search criteria
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Clear table
-                document.getElementById('searchResults').innerHTML = `
-                    <thead>
-                        <tr>
-                        <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Gender</th>
-                        <th>Age</th>
-                        <th>Enrollment Date</th>
-                        <th>Degree Program</th>
-                        <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                `;
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('searchResults').innerHTML = `
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                    <th>Enrollment Date</th>
+                                    <th>Degree Program</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        `;
 
-                // Add students to table
-                data.students.forEach(student => {
-                    document.getElementById('searchResults').innerHTML += `
-                        <tr>
-                        <td>${student.studentId}</td>
-                        <td>${student.firstName}</td>
-                        <td>${student.lastName}</td>
-                        <td>${student.gender}</td>
-                        <td>${student.Age}</td>
-                        <td>${student.enrollmentDate}</td>
-                        <td>${student.degreeProgram}</td>
-                        <td>
-                            <a href="/edit_student/${student._id}" class="btn btn-info">Edit</a>
-                        </td>
-                        </tr>
-                    `;
-                });
+                        data.students.forEach(student => {
+                            document.getElementById('searchResults').innerHTML += `
+                                <tr>
+                                    <td>${student.studentId}</td>
+                                    <td>${student.firstName}</td>
+                                    <td>${student.lastName}</td>
+                                    <td>${student.gender}</td>
+                                    <td>${student.Age}</td>
+                                    <td>${student.enrollmentDate}</td>
+                                    <td>${student.degreeProgram}</td>
+                                    <td>
+                                        <a href="/edit_student/${student._id}" class="btn btn-info">Edit</a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
 
-                // If no students found, display message
-                if (data.students.length === 0) {
-                    document.getElementById('searchResults').innerHTML += `
-                        <tr>
-                            <td colspan="5">No students found.</td>
-                        </tr>
-                    `;
+                        if (data.students.length === 0) {
+                            document.getElementById('searchResults').innerHTML += `
+                                <tr>
+                                    <td colspan="8">No students found.</td>
+                                </tr>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
+                document.getElementById('searchButton').addEventListener('click', fetchStudents);
+            </script>
         </div>
     </main>
 </body>

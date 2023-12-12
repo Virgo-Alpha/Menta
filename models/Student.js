@@ -37,34 +37,27 @@ class Student {
     });
   }
 
-  // delete all students
-  static deleteAll(callback) {
-    // Remove all student records from the database
-    studentDB.remove({}, { multi: true }, (err, numRemoved) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, numRemoved);
-      }
-    });
-  }
-
   // search students by firstName, lastName and degreeProgram array
-  static searchStudents(searchCriteria, callback) {
-    // Retrieve student records from the database
-    studentDB.find({ $or: [{ firstName: searchCriteria }, { lastName: searchCriteria }, { degreeProgram: searchCriteria }] }, (err, students) => {
+  static searchStudents(firstName, lastName, degreeProgramArray, callback) {
+    const query = {
+      firstName: { $regex: new RegExp(firstName, 'i') },
+      lastName: { $regex: new RegExp(lastName, 'i') },
+      degreeProgram: { $in: degreeProgramArray}
+    }
+  
+    studentDB.find(query, (err, students) => {
       if (err) {
         callback(err);
       } else {
         callback(null, students);
       }
     });
-  }
+  }  
 
   // Find a student by their ID
-  static findById(studentId, callback) {
+  static findById(student_id, callback) {
     // Retrieve the student record from the database
-    studentDB.findOne({ studentId }, (err, student) => {
+    studentDB.findOne({ _id: student_id }, (err, student) => {
       if (err) {
         callback(err);
       } else {
@@ -74,13 +67,19 @@ class Student {
   }
 
   // Update a student's record
-  static update(studentId, updatedStudent, callback) {
+  static update(studentId, updateData, callback) {
     // Update the student record in the database
-    studentDB.update({ studentId }, { $set: updatedStudent }, {}, (err, numReplaced) => {
+    studentDB.update({ _id: studentId }, { $set: updateData }, {}, (err, numReplaced) => {
       if (err) {
         callback(err);
       } else {
-        callback(null, numReplaced);
+        studentDB.findOne({ _id: studentId }, (err, updatedStudent) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, updatedStudent); // Pass the updated student to the callback
+          }
+        });
       }
     });
   }
@@ -88,7 +87,7 @@ class Student {
   // Delete a student's record by their ID
   static delete(studentId, callback) {
     // Remove the student record from the database
-    studentDB.remove({ studentId }, {}, (err, numRemoved) => {
+    studentDB.remove({ _id: studentId }, {}, (err, numRemoved) => {
       if (err) {
         callback(err);
       } else {
@@ -104,8 +103,19 @@ class Student {
       if (err) {
         callback(err);
       } else {
-        //console.log(students);
         callback(null, students);
+      }
+    });
+  }
+
+  // delete all students
+  static deleteAll(callback) {
+    // Remove all student records from the database
+    studentDB.remove({}, { multi: true }, (err, numRemoved) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, numRemoved);
       }
     });
   }

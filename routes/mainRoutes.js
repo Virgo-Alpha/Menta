@@ -17,17 +17,16 @@ router.get('/admin_students', mainController.renderAdminStudents);
 // Students Routes
 router.get('/add_student', mainController.renderAddStudent);
 router.post('/add_student', studentController.create);
-// router.get('/edit_student/:id', mainController.renderEditStudent);
-// router.post('/edit_student/:id', studentController.update);
+router.get('/edit_student/:id', mainController.renderEditStudent); // !
+router.post('/edit_student/:id', studentController.update);
 router.delete('/admin_students', mainController.deleteAllStudents);
-// router.delete('/admin_students/:id', studentController.delete);
+router.delete('/admin_students/:id', studentController.delete);
 router.get('/search_students', mainController.initialSearchStudents);
 router.post('/search_students', mainController.searchStudents);
 
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);
 router.put('/students/:id', studentController.update);
-router.delete('/students/:id', studentController.delete);
 
 // Mentors Routes
 router.post('/mentors', mentorController.create);

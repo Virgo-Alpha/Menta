@@ -1,0 +1,122 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+        {{> admin_views/admin_sidebar}}
+        <div class="content">
+            <p style="display: none">{{_id}}</p>
+            <!-- Table for students -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Enrollment Date</th>
+                        <th>Degree Program</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{studentId}}</td>
+                        <td>{{firstName}}</td>
+                        <td>{{lastName}}</td>
+                        <td>{{gender}}</td>
+                        <td>{{age}}</td>
+                        <td>{{enrollmentDate}}</td>
+                        <td>{{degreeProgram}}</td>
+                        <td>
+                            <a href="/edit_student/{{_id}}" class="btn btn-info">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Delete Student Button -->
+            <button id="deleteStudentBtn" class="btn btn-danger">Delete Student</button>
+            <a href="/admin_students" class="btn btn-primary">Cancel</a>
+            <hr>
+
+            <!-- Edit Student Form -->
+            <form id="editStudentForm" method="POST" action="/edit_student/{{ _id }}">
+                <div class="form-group">
+                    <h2>Edit Student</h2>
+                    <label for="studentId">Student ID:</label>
+                    <input type="text" class="form-control" id="studentId" name="studentId" value="{{studentId}}">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{firstName}}">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{lastName}}">
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label><br>
+                    <label><input type="radio" name="gender" value="Male" > Male</label>
+                    <label><input type="radio" name="gender" value="Female" > Female</label>
+                    <label><input type="radio" name="gender" value="Other" > Other</label>
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="{{dateOfBirth}}">
+                </div>
+                <div class="form-group">
+                    <label for="enrollmentDate">Enrollment Date:</label>
+                    <input type="date" class="form-control" id="enrollmentDate" name="enrollmentDate" value="{{enrollmentDate}}">
+                </div>
+                <div class="form-group">
+                    <label for="degreeProgram">Degree Program:</label>
+                    <select class="form-control" id="degreeProgram" name="degreeProgram">
+                        <option value="">Select Degree Program</option>
+                        <option value="Computing" >Computing</option>
+                        <option value="Electrical Engineering" >Electrical Engineering</option>
+                        <option value="Social Science" >Social Science</option>
+                        <option value="Medicine" >Medicine</option>
+                        <option value="Business Management" >Business Management</option>
+                        <option value="Film making" >Film making</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Student Email:</label>
+                    <input type="email" class="form-control" id="studentEmail" name="studentEmail" value="{{studentEmail}}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Student</button>
+                <a href="/admin_students" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    </main>
+    <script>
+        // Delete Student Button
+        document.getElementById('deleteStudentBtn').addEventListener('click', function () {
+            const confirmDelete = confirm('Are you sure you want to delete {{firstName}} {{lastName}}?');
+
+            if (confirmDelete) {
+                fetch('/admin_students/{{_id}}', {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('{{firstName}} {{lastName}} has been deleted.');
+                        window.location.href = '/admin_students';
+                    } else {
+                        alert('Failed to delete student.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting student.');
+                });
+            }
+        });
+    </script>
+</body>
+{{> footer}}

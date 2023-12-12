@@ -158,27 +158,67 @@ initialSearchStudents: (req, res) => {
 
 // search students by firstName, lastName and degreeProgram array
 searchStudents: (req, res) => {
-  const firstName = req.query.firstName || '';
-  const lastName = req.query.lastName || '';
-  const degreeProgram = req.query.degreePrograms || ''; // Get degreeProgram from query parameters
 
-  // Convert degreeProgram string to an array
+    const firstName = req.query.firstName || '';
+    const lastName = req.query.lastName || '';
+    const degreeProgram = req.query.degreePrograms || '';
+
+  // Splitting degreePrograms on comma into an array
   const degreeProgramArray = degreeProgram.split(',');
-  console.log(degreeProgramArray);
 
   // Use the search criteria to query the students
-  if (firstName !== '' || lastName !== '' || degreeProgramArray.length !== 0) {
+  if (
+    firstName !== '' ||
+    lastName !== '' ||
+    degreeProgram.length !== 0
+  ) {
     // If search criteria specified, perform search
     Student.searchStudents(firstName, lastName, degreeProgramArray, (err, students) => {
-        if (err) {
-            res.status(500).json({ error: 'Search failed.' });
-        } else {
-          // render the search_students view and pass students data to Mustache template
-          res.json({ students });
-        }
+      if (err) {
+        res.status(500).json({ error: 'Search failed.' });
+      } else {
+        // Render the search_students view and pass students data to Mustache template
+        res.json({ students });
+      }
     });
-}
+  } else {
+    // If no search criteria specified, handle accordingly (fetch all students or show an error)
+    // Example: Fetch all students
+    Student.findAll((err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Failed to fetch students.' });
+      } else {
+        res.render('admin_views/search_students', { students });
+      }
+    });
+  }
 },
+
+// render edit_student:id
+renderEditStudent: (req, res) => {
+  const student_id = req.params.id;
+
+  Student.findById(student_id, (err, student) => {
+    if (err) {
+      res.status(500).json({ error: 'Could not find the student.' });
+    } else {
+      res.render('admin_views/edit_student', {
+        _id: student._id,
+        studentId: student.studentId,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        degreeProgram: student.degreeProgram,
+        studentEmail: student.studentEmail,
+        Age: student.Age,
+        gender: student.gender,
+        enrollmentDate: student.enrollmentDate,
+        goals: student.goals,
+        sessions: student.sessions,
+      });
+    }
+  }
+  );
+}
 
   };
   
