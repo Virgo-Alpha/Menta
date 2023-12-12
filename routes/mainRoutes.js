@@ -14,6 +14,7 @@ router.get('/admin_dashboard', mainController.renderAdminDashboard);
 router.get('/admin_sessions', mainController.renderAdminSessions);
 router.get('/admin_students', mainController.renderAdminStudents);
 router.get('/admin_mentors', mainController.renderAdminMentors);
+router.get('/student_sessions', mainController.renderStudentSessions);
 
 // Students Routes
 router.get('/add_student', mainController.renderAddStudent);
@@ -24,6 +25,8 @@ router.delete('/admin_students', mainController.deleteAllStudents);
 router.delete('/admin_students/:id', studentController.delete);
 router.get('/search_students', mainController.initialSearchStudents);
 router.post('/search_students', mainController.searchStudents);
+router.get('/search_studentSessions', mainController.initialSearchStudentSessions);
+router.post('/search_studentSessions', mainController.searchStudentSessions);
 
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);

@@ -31,6 +31,19 @@ const mainController = {
     });
   },
 
+  // render student sessions view
+  renderStudentSessions: (req, res) => {
+    // Fetch sessions data from the database
+    Session.findAll((err, sessions) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not retrieve sessions.' });
+      } else {
+        // Render the admin sessions view and pass sessions data to Mustache template
+        res.render('student_views/student_sessions', { sessions });
+      }
+    });
+  },
+
   // render add_session
   renderAddSession: (req, res) => {
     res.render('admin_views/add_session');
@@ -113,6 +126,48 @@ const mainController = {
       });
     }
   },
+
+  // render initial search_studentSessions
+  initialSearchStudentSessions: (req, res) => {
+    Session.findAll((err, sessions) => {
+      if (err) {
+        res.status(500).json({ error: 'Failed to fetch sessions.' });
+      } else {
+        res.render('student_views/search_studentSessions', { sessions });
+      }
+    });
+  },
+
+  // render search_studentSessions
+  searchStudentSessions: (req, res) => {
+    const sessionName = req.query.sessionName || '';
+    const categories = req.query.categories || ''; // Get categories from query parameters
+
+    // Convert categories string to an array
+    const categoriesArray = categories.split(',');
+
+    // Use the search criteria to query the sessions
+    if (sessionName !== '' || categoriesArray.length !== 0) {
+      // If search criteria specified, perform search
+      Session.search(sessionName, categoriesArray, (err, sessions) => {
+        if (err) {
+          res.status(500).json({ error: 'Search failed.' });
+        } else {
+          res.json({ sessions });
+        }
+      });
+    } else {
+      // If no search criteria specified, fetch all sessions
+      Session.findAll((err, sessions) => {
+        if (err) {
+          res.status(500).json({ error: 'Failed to fetch sessions.' });
+        } else {
+          res.render('student_views/search_studentSessions', { sessions });
+        }
+      });
+    }
+  },
+
 
   // render admin students view with students data
   renderAdminStudents: (req, res) => {
