@@ -1,0 +1,85 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+    <div class="content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="/add_mentor" class="btn btn-primary">Add Mentor</a>
+                <a href="/search_mentors" class="btn btn-secondary">Search Mentors</a>
+                <button id="deleteMentorsBtn" class="btn btn-danger">Delete Mentors</button>
+            </div>
+
+            <p style="display: none">{{_id}}</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Profession</th>
+                        <th>Industry</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#mentors}}
+                    <tr>
+                        <td>{{firstName}}</td>
+                        <td>{{lastName}}</td>
+                        <td>{{Age}}</td>
+                        <td>{{gender}}</td>
+                        <td>{{profession}}</td>
+                        <td>{{industry}}</td>
+                        <td>
+                            <a href="/edit_mentor/{{_id}}" class="btn btn-info">Edit</a>
+                        </td>
+                    </tr>
+                    {{/mentors}}
+                    {{^mentors}}
+                    <tr>
+                        <td colspan="7">No mentors in the database.</td>
+                    </tr>
+                    {{/mentors}}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('deleteMentorsBtn').addEventListener('click', function () {
+            // Show confirmation pop-up
+            const confirmDelete = confirm('Are you sure you want to delete all mentors in the database?');
+
+            if (confirmDelete) {
+                // If "Proceed" is clicked
+                fetch('/admin_mentors', {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success, e.g., show a success message
+                        alert('All mentors have been deleted.');
+                        // Optionally, reload the page or perform any other action after deletion
+                        window.location.reload();
+                    } else {
+                        // Handle failure, e.g., show an error message
+                        alert('Failed to delete mentors.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting mentors.');
+                });
+            }
+            // If "Cancel" is clicked, no action is taken
+        });
+    </script>
+</body>
+{{> footer}}

@@ -1,0 +1,90 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+    <div class="content">
+            <!-- Example search bar -->
+            <input type="text" id="firstName" placeholder="mentor's firstName">
+            <input type="text" id="lastName" placeholder="mentor's lastName">
+            <input type="text" id="industry" placeholder="mentor's industry">
+            <input type="text" id="profession" placeholder="mentor's profession">
+            <br><br>
+            <button type="submit" id="searchButton" class="btn btn-primary">Search</button>
+            <a href="/admin_mentors" class="btn btn-danger">Cancel</a>
+            <hr>
+            <!-- Table to display search results -->
+            <p display='None'>{{_id}}</p>
+            <table class="table" id="searchResults">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Industry</th>
+                        <th>Profession</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <script>
+                document.getElementById('searchButton').addEventListener('click', fetchMentors);
+
+                function fetchMentors() {
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const industry = document.getElementById('industry').value;
+                    const profession = document.getElementById('profession').value;
+
+                    const url = `/search_mentors?firstName=${firstName}&lastName=${lastName}&industry=${industry}&profession=${profession}`;
+
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector('#searchResults tbody');
+                        tableBody.innerHTML = '';
+
+                        data.mentors.forEach(mentor => {
+                            tableBody.innerHTML += `
+                                <tr>
+                                    <td>${mentor.firstName}</td>
+                                    <td>${mentor.lastName}</td>
+                                    <td>${mentor.gender}</td>
+                                    <td>${mentor.Age}</td>
+                                    <td>${mentor.industry}</td>
+                                    <td>${mentor.profession}</td>
+                                    <td>
+                                        <a href="/edit_mentor/${mentor._id}" class="btn btn-info">Edit</a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        if (data.mentors.length === 0) {
+                            tableBody.innerHTML += `
+                                <tr>
+                                    <td colspan="8">No mentors found.</td>
+                                </tr>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script>
+        </div>
+    </main>
+</body>
+{{> footer}}

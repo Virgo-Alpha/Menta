@@ -13,11 +13,12 @@ router.get('/student_dashboard', mainController.renderStudentDashboard);
 router.get('/admin_dashboard', mainController.renderAdminDashboard);
 router.get('/admin_sessions', mainController.renderAdminSessions);
 router.get('/admin_students', mainController.renderAdminStudents);
+router.get('/admin_mentors', mainController.renderAdminMentors);
 
 // Students Routes
 router.get('/add_student', mainController.renderAddStudent);
 router.post('/add_student', studentController.create);
-router.get('/edit_student/:id', mainController.renderEditStudent); // !
+router.get('/edit_student/:id', mainController.renderEditStudent);
 router.post('/edit_student/:id', studentController.update);
 router.delete('/admin_students', mainController.deleteAllStudents);
 router.delete('/admin_students/:id', studentController.delete);
@@ -29,10 +30,14 @@ router.get('/students/:id', studentController.findById);
 router.put('/students/:id', studentController.update);
 
 // Mentors Routes
-router.post('/mentors', mentorController.create);
-router.get('/mentors/:name', mentorController.findByName);
-router.put('/mentors/:name', mentorController.update);
-router.delete('/mentors/:name', mentorController.delete);
+router.get('/add_mentor', mainController.renderAddMentor);
+router.post('/add_mentor', mentorController.create);
+router.get('/edit_mentor/:id', mainController.renderEditMentor);
+router.post('/edit_mentor/:id', mentorController.update);
+router.delete('/admin_mentors', mainController.deleteAllMentors);
+router.delete('/admin_mentors/:id', mentorController.delete);
+router.get('/search_mentors', mainController.initialSearchMentors);
+router.post('/search_mentors', mainController.searchMentors);
 
 // Sessions Routes
 router.get('/add_session', mainController.renderAddSession);

@@ -1,0 +1,102 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+        {{> admin_views/admin_sidebar}}
+        <div class="content">
+            <p style="display: none">{{_id}}</p>
+            <!-- Table for mentors -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Profession</th>
+                        <th>Industry</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{firstName}}</td>
+                        <td>{{lastName}}</td>
+                        <td>{{gender}}</td>
+                        <td>{{Age}}</td>
+                        <td>{{profession}}</td>
+                        <td>{{industry}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Delete Mentor Button -->
+            <button id="deleteMentorBtn" class="btn btn-danger">Delete Mentor</button>
+            <a href="/admin_mentors" class="btn btn-primary">Cancel</a>
+            <hr>
+
+            <!-- Edit Mentor Form -->
+            <form id="editMentorForm" method="POST" action="/edit_mentor/{{ _id }}">
+                    <h2>Edit Mentor</h2>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{firstName}}">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{lastName}}">
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label><br>
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="{{dateOfBirth}}">
+                </div>
+                <div class="form-group">
+                    <label for="profession">Profession:</label>
+                    <input type="text" class="form-control" id="profession" name="profession" value="{{profession}}">
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry:</label>
+                    <input type="text" class="form-control" id="industry" name="industry" value="{{industry}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Mentor</button>
+                <a href="/admin_mentors" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    </main>
+    <script>
+        // Delete Mentor Button
+        document.getElementById('deleteMentorBtn').addEventListener('click', function () {
+            const confirmDelete = confirm('Are you sure you want to delete {{firstName}} {{lastName}}?');
+
+            if (confirmDelete) {
+                fetch('/admin_mentors/{{_id}}', {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('{{firstName}} {{lastName}} has been deleted.');
+                        window.location.href = '/admin_mentors';
+                    } else {
+                        alert('Failed to delete mentor.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting mentor.');
+                });
+            }
+        });
+    </script>
+</body>
+{{> footer}}

@@ -1,0 +1,30 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+        {{> admin_views/admin_sidebar}}
+        <div class="content">
+            <div class="container mt-5">
+                <h2>Mentor Updated successfully: </h2>
+                <p><strong>First Name:</strong> {{ firstName }}</p>
+                <p><strong>Last Name:</strong> {{ lastName }}</p>
+                <p><strong>Gender:</strong> {{ gender }}</p>
+                <p><strong>Age:</strong> {{ Age }}</p>
+                <p><strong>Profession:</strong> {{ profession }}</p>
+                <p><strong>Industry:</strong> {{ industry }}</p>
+
+                <!-- Buttons to view all mentors and edit current mentor -->
+                <div class="mt-3">
+                    <a href="/admin_mentors" class="btn btn-primary">View All Mentors</a>
+                    <a href="/edit_mentor/{{ mentor_id }}" class="btn btn-secondary">Edit Mentor</a>
+                </div>
+            </div>
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}
