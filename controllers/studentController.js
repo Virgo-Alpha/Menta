@@ -60,7 +60,7 @@ const studentController = {
     const student_id = req.params.id;
     const { studentId, firstName, lastName, dateOfBirth, gender, studentEmail, enrollmentDate, degreeProgram } = req.body;
 
-    // ! Check for empty values before updating
+    // Check for empty values before updating
     const updateData = {};
     if (studentId) updateData.studentId = studentId;
     if (firstName) updateData.firstName = firstName;
@@ -103,8 +103,6 @@ const studentController = {
       }
     });
   },
-
-  // Delete all students
 
 };
 
