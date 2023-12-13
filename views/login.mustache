@@ -18,6 +18,9 @@
                         <h2 class="text-center mb-4">Sign In</h2>
                         <form method="POST" action="/login">
                             <div class="form-group">
+                            <p style="color: red">
+                            {{error}}
+                            <p>
                                 <label for="username">User Name:</label>
                                 <input type="text" id="username" name="username" placeholder="Enter username" required
                                     class="form-control">
@@ -44,8 +47,14 @@
                         </p>
                         <p class="mt-4 text-center">
                         <ul>
-                        <li>Username: newUser</li>
-                        <li>Password: newPassword</li>
+                        <li>Admin Username: admin1</li>
+                        <li>Admin Password: admin1password</li>
+                        </ul>
+                        </p>
+                        <p class="mt-4 text-center">
+                        <ul>
+                        <li>Student Username: student1</li>
+                        <li>Student Password: student1password</li>
                         </ul>
                         </p>
                         <p class="mt-4 text-center">

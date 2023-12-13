@@ -3,9 +3,10 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const UserDB = new Datastore({ filename: './data/users.db', autoload: true });
+const Student = require("./Student");
 
 // clear out the database
-UserDB.remove({}, { multi: true });
+UserDB.remove({}, { multi: true }) 
 
 class UserDAO {
   constructor(dbFilePath) {
@@ -20,27 +21,85 @@ class UserDAO {
 
   // for the demo the password is the bcrypt of the username
   init() {
-    UserDB.insert({
-      user: "Peter",
-      password: "$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C",
-      firstName: "Peter",
-      lastName: "Parker",
-      email: "peter@example.com",
-      phoneNumber: "1234567890",
+    const admins = [
+      {
+        username: "admin1",
+        password: "admin1password",
+        firstName: "Admin",
+        lastName: "One",
+        email: "admin1@example.com",
+        phoneNumber: "1234567890",
+        role: "admin",
+      },
+      {
+        username: "admin2",
+        password: "admin2password",
+        firstName: "Admin",
+        lastName: "Two",
+        email: "admin2@example.com",
+        phoneNumber: "9876543210",
+        role: "admin",
+      },
+    ];
+  
+    const students = [
+      {
+        username: "student1",
+        password: "student1password",
+        firstName: "Student",
+        lastName: "One",
+        email: "student1@example.com",
+        phoneNumber: "1112223333",
+        role: "student",
+      },
+      {
+        username: "student2",
+        password: "student2password",
+        firstName: "Student",
+        lastName: "Two",
+        email: "student2@example.com",
+        phoneNumber: "4445556666",
+        role: "student",
+      },
+      {
+        username: "student3",
+        password: "student3password",
+        firstName: "Student",
+        lastName: "Three",
+        email: "student3@example.com",
+        phoneNumber: "7778889999",
+        role: "student",
+      },
+    ];
+  
+    admins.forEach((admin) => {
+      this.create(admin.username, admin.password, admin.firstName, admin.lastName, admin.email, admin.phoneNumber, admin.role, (err, user) => {
+        if (err) {
+          console.error('Error creating admin:', err);
+          // Handle the error here
+        } else {
+          console.log('Admin created:', user);
+          // Handle successful admin creation here
+        }
+      });
     });
-    UserDB.insert({
-      user: "Ann",
-      password: "$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S",
-      firstName: "Ann",
-      lastName: "Smith",
-      email: "ann@example.com",
-      phoneNumber: "9876543210",
+  
+    students.forEach((student) => {
+      this.create(student.username, student.password, student.firstName, student.lastName, student.email, student.phoneNumber, student.role, (err, user) => {
+        if (err) {
+          console.error('Error creating student:', err);
+          // Handle the error here
+        } else {
+          console.log('Student created:', user);
+          // Handle successful student creation here
+        }
+      });
     });
+  
     return this;
   }
 
-  create(username, password, firstName, lastName, email, phoneNumber, callback) {
-    console.log("Creating user:", username);
+  create(username, password, firstName, lastName, email, phoneNumber, role) {
     const that = this;
     bcrypt.hash(password, saltRounds).then(function (hash) {
       var entry = {
@@ -50,40 +109,49 @@ class UserDAO {
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
+        role: role,
       };
       UserDB.insert(entry, function (err) {
         if (err) {
           console.log("Can't insert user:", username);
-          callback(err);
-        } else {
-          console.log("Inserted user:", username);
-          callback(null, entry);
         }
       });
+      if (role == "student") {
+        var student = {
+            user: username,
+            firstName: firstName,
+            lastName: lastName,
+            studentEmail: email,
+        }
+        Student.create(student, function (err) {
+            if (err) {
+                console.log("Can't insert student:", username);
+            }
+        });
+      }
     });
   }
 
   lookup(user, cb) {
-  UserDB.findOne({ user: user }, function (err, userEntry) {
-    if (err || !userEntry) {
-      return cb(null, null);
-    }
-    return cb(null, userEntry);
-  });
-}
-
+    UserDB.find(
+      {
+        user: user,
+      },
+      function (err, entries) {
+        if (err) {
+          return cb(null, null);
+        } else {
+          if (entries.length == 0) {
+            return cb(null, null);
+          }
+          return cb(null, entries[0]);
+        }
+      }
+    );
+  }
 }
 
 const dao = new UserDAO(UserDB);
 dao.init();
-dao.create('newUser', 'newPassword', 'John', 'Doe', 'john@example.com', '1234567890', (err, user) => {
-    if (err) {
-      console.error('Error creating user:', err);
-      // Handle the error here
-    } else {
-      // console.log('User created:', user);
-      // Handle successful user creation here
-    }
-  });
-  
+dao.create('newUser', 'newPassword', 'John', 'Doe', 'john@example.com', '1234567890');
 module.exports = dao;

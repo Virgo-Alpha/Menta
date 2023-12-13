@@ -29,13 +29,15 @@ const mainController = {
         return;
       }
       if (user) {
-        res.status(401).send('User already exists: ' + username);
+        // res.status(401).send('User already exists: ' + username);
+        res.render('login', { error: 'User: ' + username + ' already exists. Please login.' });
         return;
       }
   
       userDao.create(username, password, firstName, lastName, email, phoneNumber, (err, user) => {
         if (err) {
-          res.status(500).json({ error: 'Could not register user.' });
+          // res.status(500).json({ error: 'Could not register user.' });
+          res.render('register', { error: 'Could not register user.' });
         } else {
           console.log('Registered:', username);
           res.redirect('/login');
