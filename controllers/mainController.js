@@ -1,11 +1,61 @@
 const Session = require('../models/Session');
 const Student = require('../models/Student');
 const Mentor = require('../models/Mentor');
+const userDao = require('../models/userModel.js'); 
 
 const mainController = {
   // Render the homepage
   renderHomePage: (req, res) => {
     res.render('about'); // Assuming you have a "home.mustache" template for the homepage
+  },
+
+  // render register
+  renderRegister: (req, res) => {
+    res.render('register');
+  },
+
+  // register
+  register: (req, res) => {
+    const { username, password, firstName, lastName, email, phoneNumber } = req.body;
+
+    if(!username || !password ) {
+      res.send(401, 'No user or password.');
+      return;
+    }
+
+    userDao.lookup(username, (err, user) => {
+      if (user) {
+        res.status(401).send('User already exists:' + username);
+        return;
+      }
+
+    userDao.create(username, password, firstName, lastName, email, phoneNumber, (err, user) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not register user.' });
+      } else {
+        console.log('registered ' + username);
+        res.redirect('/login');
+      }
+    });
+  },
+  )},
+
+  // render login
+  renderLogin: (req, res) => {
+    res.render('login');
+  },
+
+  // handle login
+  handle_login: (req, res) => {
+    res.render('admin_views/admin_dashboard', { username: req.body.username });
+  },
+
+  // handle logout
+  handle_logout: (req, res) => {
+    res
+        .clearCookie("jwt")
+        .status(200)
+        .redirect("/");
   },
 
   // render student dashboard
