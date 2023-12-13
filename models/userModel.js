@@ -4,6 +4,9 @@ const saltRounds = 10;
 
 const UserDB = new Datastore({ filename: './data/users.db', autoload: true });
 
+// clear out the database
+UserDB.remove({}, { multi: true });
+
 class UserDAO {
   constructor(dbFilePath) {
     if (dbFilePath) {

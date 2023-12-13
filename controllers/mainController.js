@@ -47,7 +47,7 @@ const mainController = {
 
   // handle login
   handle_login: (req, res) => {
-    res.render('admin_views/admin_dashboard', { username: req.body.username });
+    res.render('admin_views/admin_dashboard');
   },
 
   // handle logout
