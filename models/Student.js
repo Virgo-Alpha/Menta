@@ -33,6 +33,7 @@ class Student {
         callback(err);
       } else {
         callback(null, newStudent);
+        return newStudent;
       }
     });
   }
@@ -66,6 +67,18 @@ class Student {
     });
   }
 
+  // find by studentId
+  static findByStudentId(studentId, callback) {
+    // Retrieve the student record from the database
+    studentDB.findOne({ studentId: studentId }, (err, student) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, student);
+      }
+    });
+  }
+
   // Update a student's record
   static update(studentId, updateData, callback) {
     // Update the student record in the database
@@ -83,6 +96,39 @@ class Student {
       }
     });
   }
+
+  // update sessions
+  static updateSessions(studentId, sessionData, callback) {
+    Student.findByStudentId(studentId, (err, student) => {
+      if (err || !student) {
+        console.error('Error finding student:', err);
+        // Handle error: student not found
+        return;
+      }
+
+      // Assuming 'sessions' is an array in the Student model
+    student.sessions.push(sessionData); // Add session data to the student's sessions array
+      // Session added successfully
+      console.log('Session added to student:', student);
+
+      // Update the student record in the database
+      studentDB.update({ studentId: studentId }, { $set: student }, {}, (err, numReplaced) => {
+        if (err) {
+          callback(err);
+        } else {
+          studentDB.findOne({ _id: studentId }, (err, updatedStudent) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, updatedStudent); // Pass the updated student to the callback
+            }
+          });
+        }
+      });
+      
+      callback(null, student);
+    });
+}
 
   // Delete a student's record by their ID
   static delete(studentId, callback) {

@@ -443,6 +443,39 @@ const mainController = {
     );
   },
 
+  // render add_studentSession:id
+  renderAddStudentSession: (req, res) => {
+    const sessionId = req.params.id;
+
+    Session.findById(sessionId, (err, session) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the session.' });
+      } else {
+
+          var student_id = "S1";
+
+        // update the student session
+        Student.updateSessions(student_id, sessionId, (err, student) => {
+          if (err) {
+            res.status(500).json({ error: 'Could not update student session.' });
+          } else {
+            // Render the session details page and pass session data to Mustache template
+            res.render('student_views/add_studentSession', {
+              sessionName: session.sessionName,
+              date: session.date,
+              startTime: session.startTime,
+              endTime: session.endTime,
+              category: session.category,
+              venue: session.venue,
+              mandatory: session.mandatory,
+              sessionId: sessionId // Pass sessionId for edit session URL
+            });
+          }
+        });
+      }
+    });
+  },
+
 };
 
 module.exports = mainController;

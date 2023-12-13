@@ -145,6 +145,8 @@ class UserDAO {
             studentEmail: email,
             enrollmentDate: enrollmentDate,
             degreeProgram: degreeProgram,
+            goals: [],
+            sessions: [],
 
         }
         Student.create(student, function (err) {

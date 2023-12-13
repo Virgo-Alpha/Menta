@@ -35,6 +35,7 @@ router.get('/search_students', verify, mainController.initialSearchStudents);
 router.post('/search_students', verify, mainController.searchStudents);
 router.get('/search_studentSessions', verify, mainController.initialSearchStudentSessions);
 router.post('/search_studentSessions', verify, mainController.searchStudentSessions);
+router.get('/add_studentSession/:id', verify, mainController.renderAddStudentSession);
 
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);
