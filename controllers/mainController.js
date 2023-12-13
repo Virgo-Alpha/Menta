@@ -16,7 +16,7 @@ const mainController = {
 
   // register
   register: (req, res) => {
-    const { username, password, firstName, lastName, email, phoneNumber } = req.body;
+    const { studentId, username, password, firstName, lastName, email, dateOfBirth, gender, enrollmentDate, degreeProgram, phoneNumber, role} = req.body;
   
     if (!username || !password) {
       res.status(401).send('No user or password.');
@@ -34,13 +34,13 @@ const mainController = {
         return;
       }
   
-      userDao.create(username, password, firstName, lastName, email, phoneNumber, (err, user) => {
+      userDao.create(studentId, username, password, firstName, lastName, email, dateOfBirth, gender, enrollmentDate, degreeProgram, phoneNumber, role, (err, user) => {
         if (err) {
           // res.status(500).json({ error: 'Could not register user.' });
           res.render('register', { error: 'Could not register user.' });
         } else {
-          console.log('Registered:', username);
-          res.redirect('/login');
+          // console.log('Registered:', username);
+          res.render('/login', { error: 'User: ' + username + ' successfully created. Please login.' });
         }
       });
     });
@@ -53,12 +53,20 @@ const mainController = {
 
   // handle login
   handle_login: (req, res) => {
-    // Access the username from req.user
-    const username = req.user;
-    // console.log('username: ' + username);
+    // Access the username and role from req.user
+    const { username, role } = req.user;
 
-    res.render('admin_views/admin_dashboard', { username: username });
-  },
+    // Determine the appropriate dashboard based on the user's role
+    let dashboard = '';
+    if (role === 'admin') {
+        dashboard = 'admin_views/admin_dashboard'; // Admin dashboard view
+    } else if (role === 'student') {
+        dashboard = 'student_views/student_dashboard'; // Student dashboard view
+    }
+
+    // Render the appropriate dashboard view
+    res.render(dashboard, { username: username });
+},
 
   // handle logout
   handle_logout: (req, res) => {

@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const {login} = require('../.auth/auth');
 const {verify} = require('../.auth/auth');
+const {verify_admin} = require('../.auth/auth');
 
 const mainController = require('../controllers/mainController');
 const studentController = require('../controllers/studentController');
@@ -12,11 +13,11 @@ const sessionController = require('../controllers/sessionController');
 // Route for the homepage ("/")
 router.get('/', mainController.renderHomePage);
 router.get('/student_dashboard', mainController.renderStudentDashboard);
-router.get('/admin_dashboard', verify, mainController.renderAdminDashboard);
+router.get('/admin_dashboard', verify_admin, mainController.renderAdminDashboard);
 router.get('/admin_sessions', verify, mainController.renderAdminSessions);
 router.get('/admin_students', verify, mainController.renderAdminStudents);
 router.get('/admin_mentors', verify, mainController.renderAdminMentors);
-router.get('/student_sessions', mainController.renderStudentSessions);
+router.get('/student_sessions', verify, mainController.renderStudentSessions);
 router.get('/register', mainController.renderRegister);
 router.post('/register', mainController.register);
 router.get('/login', mainController.renderLogin);
@@ -52,10 +53,10 @@ router.post('/search_mentors', verify, mainController.searchMentors);
 // Sessions Routes
 router.get('/add_session', verify, mainController.renderAddSession);
 
-router.post('/add_session', verify, sessionController.create);
+router.post('/add_session', verify_admin, sessionController.create);
 router.get('/edit_session/:id', verify, mainController.renderEditSession);
 router.post('/edit_session/:id', verify, sessionController.update);
-router.delete('/admin_sessions', verify, mainController.deleteAll);
+router.delete('/admin_sessions', verify_admin, mainController.deleteAll);
 router.delete('/admin_sessions/:id', verify, sessionController.delete);
 router.get('/search_sessions', verify, mainController.initialSearch);
 router.post('/search_sessions', verify, mainController.searchSessions);

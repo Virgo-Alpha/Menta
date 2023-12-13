@@ -5,9 +5,6 @@ const saltRounds = 10;
 const UserDB = new Datastore({ filename: './data/users.db', autoload: true });
 const Student = require("./Student");
 
-// clear out the database
-UserDB.remove({}, { multi: true }) 
-
 class UserDAO {
   constructor(dbFilePath) {
     if (dbFilePath) {
@@ -20,7 +17,7 @@ class UserDAO {
   }
 
   // for the demo the password is the bcrypt of the username
-  init() {
+  init(callback) {
     const admins = [
       {
         username: "admin1",
@@ -43,34 +40,61 @@ class UserDAO {
     ];
   
     const students = [
-      {
-        username: "student1",
-        password: "student1password",
-        firstName: "Student",
-        lastName: "One",
-        email: "student1@example.com",
-        phoneNumber: "1112223333",
-        role: "student",
-      },
-      {
-        username: "student2",
-        password: "student2password",
-        firstName: "Student",
-        lastName: "Two",
-        email: "student2@example.com",
-        phoneNumber: "4445556666",
-        role: "student",
-      },
-      {
-        username: "student3",
-        password: "student3password",
-        firstName: "Student",
-        lastName: "Three",
-        email: "student3@example.com",
-        phoneNumber: "7778889999",
-        role: "student",
-      },
-    ];
+        {
+          studentId: "S1",
+          username: "student1",
+          password: "student1password",
+          firstName: "Student",
+          lastName: "One",
+          email: "student1@example.com",
+          phoneNumber: "1112223333",
+          role: "student",
+          studentId: "S1",
+          dateOfBirth: "1999-01-01",
+          gender: "Male",
+          studentEmail: "student1@example.com",
+          enrollmentDate: "2023-09-01",
+          degreeProgram: "Computer Science",
+          goals: [],
+          sessions: [],
+        },
+        {
+          studentId: "S2",
+          username: "student2",
+          password: "student2password",
+          firstName: "Student",
+          lastName: "Two",
+          email: "student2@example.com",
+          phoneNumber: "4445556666",
+          role: "student",
+          studentId: "S2",
+          dateOfBirth: "1998-03-15",
+          gender: "Female",
+          studentEmail: "student2@example.com",
+          enrollmentDate: "2023-09-01",
+          degreeProgram: "Electrical Engineering",
+          goals: [],
+          sessions: [],
+        },
+        {
+          studentId: "S3",
+          username: "student3",
+          password: "student3password",
+          firstName: "Student",
+          lastName: "Three",
+          email: "student3@example.com",
+          phoneNumber: "7778889999",
+          role: "student",
+          studentId: "S3",
+          dateOfBirth: "2000-05-20",
+          gender: "Other",
+          studentEmail: "student3@example.com",
+          enrollmentDate: "2023-09-01",
+          degreeProgram: "Social Science",
+          goals: [],
+          sessions: [],
+        },
+      ];      
   
     admins.forEach((admin) => {
       this.create(admin.username, admin.password, admin.firstName, admin.lastName, admin.email, admin.phoneNumber, admin.role, (err, user) => {
@@ -85,7 +109,7 @@ class UserDAO {
     });
   
     students.forEach((student) => {
-      this.create(student.username, student.password, student.firstName, student.lastName, student.email, student.phoneNumber, student.role, (err, user) => {
+      this.create(student.username, student.password, student.firstName, student.lastName, student.email, student.phoneNumber, student.role, student.studentId, student.dateOfBirth, student.gender, student.enrollmentDate, student.degreeProgram,  (err, user) => {
         if (err) {
           console.error('Error creating student:', err);
           // Handle the error here
@@ -99,7 +123,7 @@ class UserDAO {
     return this;
   }
 
-  create(username, password, firstName, lastName, email, phoneNumber, role) {
+  create(username, password, firstName, lastName, email, phoneNumber, role, studentId, dateOfBirth, gender, enrollmentDate, degreeProgram) {
     const that = this;
     bcrypt.hash(password, saltRounds).then(function (hash) {
       var entry = {
@@ -111,24 +135,34 @@ class UserDAO {
         phoneNumber: phoneNumber,
         role: role,
       };
-      UserDB.insert(entry, function (err) {
-        if (err) {
-          console.log("Can't insert user:", username);
-        }
-      });
       if (role == "student") {
         var student = {
-            user: username,
+            studentId: studentId,
             firstName: firstName,
             lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            gender: gender,
             studentEmail: email,
+            enrollmentDate: enrollmentDate,
+            degreeProgram: degreeProgram,
+
         }
         Student.create(student, function (err) {
             if (err) {
                 console.log("Can't insert student:", username);
+            } else {
+                console.log("Student inserted:", username);
             }
         });
       }
+      UserDB.insert(entry, function (err) {
+        if (err) {
+          console.log("Can't insert user:", username);
+        } else {
+            console.log("User inserted:", username);
+        }
+      });
+      
     });
   }
 
@@ -152,6 +186,12 @@ class UserDAO {
 }
 
 const dao = new UserDAO(UserDB);
+
+// clear out the database
+UserDB.remove({}, { multi: true }, function (err, numRemoved) {
+    console.log("Removed", numRemoved, "users");
+  });
+
 dao.init();
 dao.create('newUser', 'newPassword', 'John', 'Doe', 'john@example.com', '1234567890');
 module.exports = dao;

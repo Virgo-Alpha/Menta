@@ -124,4 +124,9 @@ class Student {
 // Configure the NeDB database for students
 const studentDB = new Datastore({ filename: './data/students.db', autoload: true });
 
+// Clear out the database
+studentDB.remove({}, { multi: true }, function (err, numRemoved) {
+  console.log('Removed', numRemoved, 'students');
+});
+
 module.exports = Student;
