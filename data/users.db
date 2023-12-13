@@ -1,9 +1,4 @@
-{"user":"newUser","password":"$2b$10$PX9l17SAEJghOrC8JOZ1n.qjy5KyH6Xp3elRsbxbjTJWAU.9FOtya","firstName":"John","lastName":"Doe","email":"john@example.com","phoneNumber":"1234567890","_id":"MhpEabRNkqFyaYAo"}
-{"user":"Ann","password":"$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S","firstName":"Ann","lastName":"Smith","email":"ann@example.com","phoneNumber":"9876543210","_id":"cTsDi2Q4rKD8UXV8"}
-{"user":"Peter","password":"$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C","firstName":"Peter","lastName":"Parker","email":"peter@example.com","phoneNumber":"1234567890","_id":"zCrEDqBzanU6M1Ad"}
-{"$$deleted":true,"_id":"MhpEabRNkqFyaYAo"}
-{"$$deleted":true,"_id":"cTsDi2Q4rKD8UXV8"}
-{"$$deleted":true,"_id":"zCrEDqBzanU6M1Ad"}
-{"user":"Peter","password":"$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C","firstName":"Peter","lastName":"Parker","email":"peter@example.com","phoneNumber":"1234567890","_id":"aNx2FGoXeGFBwkjb"}
-{"user":"Ann","password":"$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S","firstName":"Ann","lastName":"Smith","email":"ann@example.com","phoneNumber":"9876543210","_id":"3OnYn9WW2h5RA2hV"}
-{"user":"newUser","password":"$2b$10$4Z4QSex5B6nwn4mlP2h51ekOcQ5JYU0hGpgY5E0v.wsxad8t8PVlK","firstName":"John","lastName":"Doe","email":"john@example.com","phoneNumber":"1234567890","_id":"kMeyf9h5xFa5EUjT"}
+{"user":"Peter","password":"$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C","firstName":"Peter","lastName":"Parker","email":"peter@example.com","phoneNumber":"1234567890","_id":"hDGYEjLJGGsHKUBu"}
+{"user":"Ann","password":"$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S","firstName":"Ann","lastName":"Smith","email":"ann@example.com","phoneNumber":"9876543210","_id":"WRlO7XkB9VkgP0s0"}
+{"user":"newUser","password":"$2b$10$FPOHbnfLD5eTF.GyZpV.p.jVT4NwK7.wagHLXHus.icQNgB0U1H46","firstName":"John","lastName":"Doe","email":"john@example.com","phoneNumber":"1234567890","_id":"kIa7uhebD6a0zvW0"}
+{"user":"student","password":"$2b$10$ZjWCaar2eAoD/289ZlmwvO3FP5WLDsu4R9lPGBj9GoMpB1hcVnPGC","firstName":"Benson","lastName":"Mugure","email":"b.mugure@alustudent.com","phoneNumber":"58417723","_id":"I5z7wYkHRjIZCxh4"}

@@ -25,6 +25,7 @@ exports.login = function (req, res, next) {
         res.cookie("jwt", accessToken);
 
         //and then pass onto the next middleware
+        req.user = username;
         next();
       } else {
         res.status(403).send();
@@ -43,6 +44,7 @@ exports.verify = function (req, res, next) {
   let payload;
   try {
     payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    req.user = req.body.username;
     next();
   } catch (e) {
     //if an error occurred return request unauthorized error

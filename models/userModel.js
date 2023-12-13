@@ -39,7 +39,8 @@ class UserDAO {
     return this;
   }
 
-  create(username, password, firstName, lastName, email, phoneNumber) {
+  create(username, password, firstName, lastName, email, phoneNumber, callback) {
+    console.log("Creating user:", username);
     const that = this;
     bcrypt.hash(password, saltRounds).then(function (hash) {
       var entry = {
@@ -53,31 +54,36 @@ class UserDAO {
       UserDB.insert(entry, function (err) {
         if (err) {
           console.log("Can't insert user:", username);
+          callback(err);
+        } else {
+          console.log("Inserted user:", username);
+          callback(null, entry);
         }
       });
     });
   }
 
   lookup(user, cb) {
-    UserDB.find(
-      {
-        user: user,
-      },
-      function (err, entries) {
-        if (err) {
-          return cb(null, null);
-        } else {
-          if (entries.length == 0) {
-            return cb(null, null);
-          }
-          return cb(null, entries[0]);
-        }
-      }
-    );
-  }
+  UserDB.findOne({ user: user }, function (err, userEntry) {
+    if (err || !userEntry) {
+      return cb(null, null);
+    }
+    return cb(null, userEntry);
+  });
+}
+
 }
 
 const dao = new UserDAO(UserDB);
 dao.init();
-dao.create('newUser', 'newPassword', 'John', 'Doe', 'john@example.com', '1234567890');
+dao.create('newUser', 'newPassword', 'John', 'Doe', 'john@example.com', '1234567890', (err, user) => {
+    if (err) {
+      console.error('Error creating user:', err);
+      // Handle the error here
+    } else {
+      // console.log('User created:', user);
+      // Handle successful user creation here
+    }
+  });
+  
 module.exports = dao;

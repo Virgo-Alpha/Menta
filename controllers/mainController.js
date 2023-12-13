@@ -17,28 +17,32 @@ const mainController = {
   // register
   register: (req, res) => {
     const { username, password, firstName, lastName, email, phoneNumber } = req.body;
-
-    if(!username || !password ) {
-      res.send(401, 'No user or password.');
+  
+    if (!username || !password) {
+      res.status(401).send('No user or password.');
       return;
     }
-
+  
     userDao.lookup(username, (err, user) => {
-      if (user) {
-        res.status(401).send('User already exists:' + username);
+      if (err) {
+        res.status(500).json({ error: 'Error finding user.' });
         return;
       }
-
-    userDao.create(username, password, firstName, lastName, email, phoneNumber, (err, user) => {
-      if (err) {
-        res.status(500).json({ error: 'Could not register user.' });
-      } else {
-        console.log('registered ' + username);
-        res.redirect('/login');
+      if (user) {
+        res.status(401).send('User already exists: ' + username);
+        return;
       }
+  
+      userDao.create(username, password, firstName, lastName, email, phoneNumber, (err, user) => {
+        if (err) {
+          res.status(500).json({ error: 'Could not register user.' });
+        } else {
+          console.log('Registered:', username);
+          res.redirect('/login');
+        }
+      });
     });
   },
-  )},
 
   // render login
   renderLogin: (req, res) => {
@@ -47,7 +51,11 @@ const mainController = {
 
   // handle login
   handle_login: (req, res) => {
-    res.render('admin_views/admin_dashboard');
+    // Access the username from req.user
+    const username = req.user;
+    // console.log('username: ' + username);
+
+    res.render('admin_views/admin_dashboard', { username: username });
   },
 
   // handle logout
