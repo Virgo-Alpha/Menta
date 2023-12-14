@@ -8,16 +8,16 @@ coaching platform.
 
 ● View the available coaching/mentoring opportunities based on the
 three categories (Career advice, Resume Review, and Mock
-Interview)
-● Add, remove, and modify the coaching/mentoring opportunities they plan to participate in.
+Interview)<br></br>
+● Add, remove, and modify the coaching/mentoring opportunities they plan to participate in.<br></br>
 ● There should be at least three categories of coaching/mentoring:
-Career advice, Resume Review, and Mock Interview.
+Career advice, Resume Review, and Mock Interview.<br></br>
 
 3) Admin should be able to log in and perform the following:
 
-● View all the student's records.
-● Add, modify, and delete students' records.
-● Add and delete mentors including mentoring
+● View all the student's records.<br></br>
+● Add, modify, and delete students' records.<br></br>
+● Add and delete mentors including mentoring<br></br>
 
 
 - Link to [report](https://drive.google.com/file/d/1t8LMo4A89sPoxmLtcUK9PqmNn-KMfo0i/view?usp=sharing)
@@ -97,12 +97,16 @@ We welcome contributions from the community! If you encounter issues or have ide
 Please note that as a contributor, you are expected to follow our Code of Conduct. Make sure to review and adhere to these guidelines.
 
 ## Dependencies
-Node.js
+- bcrypt==5.1.1
+- bcryptjs==2.4.3
+- cookie-parser==1.4.6
+- dotenv==16.3.1
+- express==4.18.2
+- express-route-list-cli==2.0.6
+- express-session==1.17.3
+- jsonwebtoken==9.0.2
+- mustache-express==1.3.2
+- nedb==1.8.0
+- passport==0.7.0
+- passport-local==1.0.0
 
-NeDB
-
-Mustache
-
-[Other dependencies, if any]
-
-[Include any other relevant information or acknowledgments]
