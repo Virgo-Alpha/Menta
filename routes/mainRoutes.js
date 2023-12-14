@@ -32,6 +32,7 @@ router.get('/added_sessions', verify, mainController.renderAllStudentSessions);
 router.get('/admin_opportunity', verify, mainController.renderAdminOpportunity);
 router.get('/admin_settings', verify, mainController.renderAdminSettings);
 router.get('/admin_profile', verify, mainController.renderAdminProfile);
+router.get('/admin_report', verify, mainController.renderAdminReport);
 
 // Students Routes
 router.get('/add_student', verify, mainController.renderAddStudent);
@@ -48,6 +49,7 @@ router.get('/add_studentSession/:id', verify, mainController.renderAddStudentSes
 router.get('/student_opportunity', verify, studentController.renderStudentOpportunity);
 router.get('/student_profile', verify, studentController.renderStudentProfile);
 router.get('/student_settings', verify, studentController.renderStudentSettings);
+router.get('/student_report', verify, studentController.renderStudentReport);
 
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);

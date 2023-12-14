@@ -119,6 +119,11 @@ const studentController = {
     res.render('student_views/student_settings');
   },
 
+  // render student report
+  renderStudentReport: (req, res) => {
+    res.render('student_views/student_report');
+  },
+
 };
 
 module.exports = studentController;

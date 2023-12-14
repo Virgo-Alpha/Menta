@@ -583,6 +583,11 @@ const mainController = {
     res.render('admin_views/admin_profile');
   },
 
+  // render admin report
+  renderAdminReport: (req, res) => {
+    res.render('admin_views/admin_report');
+  },
+
 };
 
 module.exports = mainController;

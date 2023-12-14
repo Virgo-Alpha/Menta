@@ -1,0 +1,42 @@
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include your custom CSS files -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<!-- Header and sidebar templates are included -->
+
+<body>
+    <main class="main-content">
+        <!-- Sidebar and header components are included here -->
+        <div class="content">
+            <h1>Welcome!</h1>
+            
+            <!-- Chart canvas elements -->
+            <div>
+                <canvas id="attendancePieChart" width="400" height="400"></canvas>
+            </div>
+            <div>
+                <canvas id="enrollmentScatterPlot" width="400" height="400"></canvas>
+            </div>
+            <div>
+                <canvas id="admissionLineChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </main>
+</body>
+
+{{> footer}}
+
+<script>
+    // Import the generated chart objects
+    const { pieChart, scatterPlot, lineChart } = require('./controllers/reportfile.js');
+
+    // Render the charts using Chart.js
+    new Chart(document.getElementById('attendancePieChart'), pieChart);
+    new Chart(document.getElementById('enrollmentScatterPlot'), scatterPlot);
+    new Chart(document.getElementById('admissionLineChart'), lineChart);
+</script>

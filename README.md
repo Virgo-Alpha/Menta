@@ -6,17 +6,17 @@
 
 - Link to [Live site](https/example.com)
 
-- Link to [video](https/example.com)
+## Demo Video
 
-- Link to [slide deck](https/example.com)
+
 
 ## Features
 
 - Feature 1: [Description]
 - Feature 2: [Description]
 - Feature 3: [Description]
-- App functionality: [Complex Implementation of CRUD functionality, display of data,]
-- Authentication: [great strategy, successful implementation for all user groups, excellent design and validation. Evidence of consideration of the user experience.]
+- App functionality: Complex Implementation of CRUD functionality and display of data
+- Authentication: Multi-level user access accomodated for admin and students. Middleware used to restrct routes' access
 - Deployment: [Site was Successfully deployed and well structured code as available via remote repository with readme file, commits, etc.]
 - ...
 

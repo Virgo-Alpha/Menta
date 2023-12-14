@@ -1,0 +1,20 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> admin_views/admin_sidebar}}
+            <div class="content">
+            <h1>Report!</h1>
+            {{> reports}}
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}
