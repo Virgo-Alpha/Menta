@@ -1,20 +1,4 @@
-<head>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Include your custom CSS files -->
-    <link href="/css/dashboard.css" rel="stylesheet">
-    <!-- Include Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
-<!-- Header and sidebar templates are included -->
-
-<body>
-    <main class="main-content">
-        <!-- Sidebar and header components are included here -->
-        <div class="content">
-            <h1>Welcome!</h1>
-            
+         
             <!-- Chart canvas elements -->
             <div>
                 <canvas id="attendancePieChart" width="400" height="400"></canvas>
@@ -25,18 +9,84 @@
             <div>
                 <canvas id="admissionLineChart" width="400" height="400"></canvas>
             </div>
-        </div>
-    </main>
-</body>
 
-{{> footer}}
-
+<!-- Chart script -->
 <script>
-    // Import the generated chart objects
-    const { pieChart, scatterPlot, lineChart } = require('./controllers/reportfile.js');
+// Import the generated chart objects
+        const pieChart = {
+            type: 'pie',
+            data: {
+                labels: ['Attended', 'Missed'],
+                datasets: [{
+                    data: [75, 25], // Example data: 75% attended, 25% missed
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)', // Blue for attended
+                        'rgba(255, 99, 132, 0.7)' // Red for missed
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                // Add options for the pie chart (title, legend, etc.)
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        };
 
-    // Render the charts using Chart.js
-    new Chart(document.getElementById('attendancePieChart'), pieChart);
-    new Chart(document.getElementById('enrollmentScatterPlot'), scatterPlot);
-    new Chart(document.getElementById('admissionLineChart'), lineChart);
+        const scatterPlot = {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Enrollment',
+                    data: [
+                        { x: 1, y: 50 },
+                        { x: 2, y: 70 },
+                        { x: 3, y: 90 },
+                        // More data points
+                    ],responsive: true,
+    maintainAspectRatio: false,
+                    backgroundColor: 'rgba(255, 206, 86, 0.5)' // Yellowish
+                }]
+            },
+            options: {
+                // Add options for the scatter plot (title, axis labels, etc.)
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        };
+
+        const lineChart = {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Admitted',
+                    data: [30, 45, 60, 75, 80, 90], // Example data for admissions
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Hired',
+                    data: [10, 20, 35, 45, 50, 60], // Example data for hires
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                // Add options for the line chart (title, axis labels, etc.)
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        };
+
+        
+
+        // Render the charts using Chart.js
+        new Chart(document.getElementById('attendancePieChart'), pieChart);
+        new Chart(document.getElementById('enrollmentScatterPlot'), scatterPlot);
+        new Chart(document.getElementById('admissionLineChart'), lineChart);
+
 </script>
+

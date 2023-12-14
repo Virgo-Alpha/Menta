@@ -1,3 +1,5 @@
+import { pieChart, scatterPlot, lineChart } from 'chart.js';
+
 const pieChart = {
     type: 'pie',
     data: {
@@ -59,4 +61,4 @@ const lineChart = {
     }
 };
 
-module.exports = { pieChart, scatterPlot, lineChart };
+export default { pieChart, scatterPlot, lineChart };
