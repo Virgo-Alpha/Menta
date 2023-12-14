@@ -1,22 +1,23 @@
-<div class="user-profile">
-    <h2>User Profile</h2>
-    <div class="username">
-        <h3>Username</h3>
-        <p>Username: <span>{{username}}</span></p>
-        <!-- Option to edit username -->
-        <button>Edit</button>
-    </div>
-    <div class="location">
-        <h3>Location</h3>
-        <p>Location: <span>{{location}}</span></p>
-        <!-- Option to change location -->
-        <button>Change</button>
-    </div>
-    <div class="profile-pic">
-        <h3>Profile Picture</h3>
-        <!-- Display profile picture -->
-        <img src="{{profilePicURL}}" alt="Profile Picture">
-        <!-- Option to update profile picture -->
-        <button>Update</button>
+<div class="container">
+    <div class="user-profile">
+        <div class="username mt-4">
+            <h3>Username</h3>
+            <p>Username: <span>{{username}}</span></p>
+            <!-- Option to edit username -->
+            <button class="btn btn-secondary">Edit</button>
+        </div>
+        <div class="location mt-4">
+            <h3>Location</h3>
+            <p>Location: <span>{{location}}</span></p>
+            <!-- Option to change location -->
+            <button class="btn btn-secondary">Change</button>
+        </div>
+        <div class="profile-pic mt-4">
+            <h3>Profile Picture</h3>
+            <!-- Display profile picture -->
+            <p><img src="{{profilePicURL}}" alt="Profile Picture" class="img-fluid rounded-circle"></p>
+            <!-- Option to update profile picture -->
+            <button class="btn btn-secondary">Update</button>
+        </div>
     </div>
 </div>
