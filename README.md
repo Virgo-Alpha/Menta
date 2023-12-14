@@ -2,12 +2,13 @@
 
 [Short project description]
 
-- Link to [report](https/example.com)
+- Link to [report]([https/example.com](https://drive.google.com/file/d/1t8LMo4A89sPoxmLtcUK9PqmNn-KMfo0i/view?usp=sharing))
 
-- Link to [Live site](https/example.com)
+- Link to [Live site]([https/example.com](https://menta-b-mugure-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/))
 
 ## Demo Video
 
+https://github.com/Virgo-Alpha/Menta/assets/79147634/c5906141-7793-48c7-89bb-c2128788009e
 
 
 ## Features
