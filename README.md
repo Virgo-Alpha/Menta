@@ -1,10 +1,28 @@
 # Menta
 
-[Short project description]
+Web Platform Development Coursework: An Application that matches mentors and mentees for mentorship sessions
+The application should allow the following:
+1) Users who are not logged in can see the About Us page with the details of the
+coaching platform.
+2) Students should be able to log in and perform the following:
 
-- Link to [report]([https/example.com](https://drive.google.com/file/d/1t8LMo4A89sPoxmLtcUK9PqmNn-KMfo0i/view?usp=sharing))
+● View the available coaching/mentoring opportunities based on the
+three categories (Career advice, Resume Review, and Mock
+Interview)
+● Add, remove, and modify the coaching/mentoring opportunities they plan to participate in.
+● There should be at least three categories of coaching/mentoring:
+Career advice, Resume Review, and Mock Interview.
 
-- Link to [Live site]([https/example.com](https://menta-b-mugure-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/))
+3) Admin should be able to log in and perform the following:
+
+● View all the student's records.
+● Add, modify, and delete students' records.
+● Add and delete mentors including mentoring
+
+
+- Link to [report](https://drive.google.com/file/d/1t8LMo4A89sPoxmLtcUK9PqmNn-KMfo0i/view?usp=sharing)
+
+- Link to [Live site](https://menta-b-mugure-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/)
 
 ## Demo Video
 
@@ -13,13 +31,12 @@ https://github.com/Virgo-Alpha/Menta/assets/79147634/c5906141-7793-48c7-89bb-c21
 
 ## Features
 
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
 - App functionality: Complex Implementation of CRUD functionality and display of data
 - Authentication: Multi-level user access accomodated for admin and students. Middleware used to restrct routes' access
-- Deployment: [Site was Successfully deployed and well structured code as available via remote repository with readme file, commits, etc.]
-- ...
+- Deployment: Site was Successfully deployed and well structured code as available via remote repository with readme file, commits, etc.
+- Student and Admin Dashboards
+- User Profiles
+- Reports
 
 ## Setup
 
