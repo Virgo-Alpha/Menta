@@ -3,7 +3,6 @@ const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 
 const mainRoutes = require('./routes/mainRoutes'); // Import the mainRoutes
-const expressListRoutes = require('express-list-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
