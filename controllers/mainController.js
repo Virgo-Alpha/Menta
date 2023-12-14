@@ -34,15 +34,29 @@ const mainController = {
         return;
       }
   
-      userDao.create(studentId, username, password, firstName, lastName, email, dateOfBirth, gender, enrollmentDate, degreeProgram, phoneNumber, role, (err, user) => {
-        if (err) {
-          // res.status(500).json({ error: 'Could not register user.' });
-          res.render('register', { error: 'Could not register user.' });
-        } else {
-          // console.log('Registered:', username);
-          res.render('/login', { error: 'User: ' + username + ' successfully created. Please login.' });
+      userDao.create(
+        studentId,
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        gender,
+        enrollmentDate,
+        degreeProgram,
+        phoneNumber,
+        role,
+        (err, user) => {
+          if (err) {
+            res.render('register', { error: 'Could not register user.' });
+          } else {
+            res.render('login', {
+              error: 'User: ' + user.username + ' successfully created. Please login.',
+            });
+          }
         }
-      });
+      );
     });
   },
 

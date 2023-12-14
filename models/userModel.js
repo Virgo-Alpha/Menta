@@ -123,7 +123,7 @@ class UserDAO {
     return this;
   }
 
-  create(username, password, firstName, lastName, email, phoneNumber, role, studentId, dateOfBirth, gender, enrollmentDate, degreeProgram) {
+  create(username, password, firstName, lastName, email, phoneNumber, role, studentId, dateOfBirth, gender, enrollmentDate, degreeProgram, callback) {
     const that = this;
     bcrypt.hash(password, saltRounds).then(function (hash) {
       var entry = {
@@ -153,7 +153,7 @@ class UserDAO {
             if (err) {
                 console.log("Can't insert student:", username);
             } else {
-                console.log("Student inserted:", username);
+                // console.log("Student inserted:", username);
             }
         });
       }
@@ -161,12 +161,19 @@ class UserDAO {
         if (err) {
           console.log("Can't insert user:", username);
         } else {
-            console.log("User inserted:", username);
+            // console.log("User inserted:", username);
+            return entry;
+            
         }
       });
-      
-    });
-  }
+      // return the new user
+        //return callback(null, entry);
+    })
+    // .catch(function (err) {
+    //   console.log("Error hashing password for user", username);
+    //   return callback(err);
+    // });
+    }
 
   lookup(user, cb) {
     UserDB.find(
