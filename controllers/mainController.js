@@ -454,6 +454,20 @@ const mainController = {
 
           var student_id = "S1";
 
+          // Add the student_id to the session
+        Student.findByStudentId(student_id, (err, student) => {
+          if (err) {
+            res.status(500).json({ error: 'Could not find the student.' });
+          } else {
+            // update the session
+            // Session.updateMenteeList(sessionId, student._id, (err, session) => {
+            //   if (err) {
+            //     res.status(500).json({ error: 'Could not update session.' });
+            //   }
+            // });
+          }
+        });
+
         // update the student session
         Student.updateSessions(student_id, sessionId, (err, student) => {
           if (err) {
@@ -474,6 +488,99 @@ const mainController = {
         });
       }
     });
+  },
+
+  // render all student sessions
+  renderAllStudentSessions: (req, res) => {
+    const studentId = "S1";
+
+    Student.findByStudentId(studentId, (err, student) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        // find goal by _id
+        var sessions = [];
+
+        student.sessions.forEach(sessionId => {
+          Session.findById(sessionId, (err, session) => {
+            if (err) {
+              res.status(500).json({ error: 'Could not find the session.' });
+            } else {
+              sessions.push(session);
+            }
+          });
+        });
+
+
+        res.render('student_views/added_sessions', {
+          sessions,
+        });
+      }
+    });
+  },
+
+  // render student goals
+  renderStudentGoals: (req, res) => {
+    const studentId = "S1"
+
+    Student.viewGoals(studentId, (err, student) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        res.render('student_views/student_goals', {
+          goals: student.goals,
+        });
+      }
+    });
+  },
+
+  // render add student goal
+  renderAddStudentGoal: (req, res) => {
+    res.render('student_views/add_studentGoal');
+  },
+
+  // add Student Goal
+  addStudentGoal: (req, res) => {
+    const studentId = "S1";
+    const goalData = req.body.goal;
+
+    Student.addGoals(studentId, goalData, (err, student) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not add goal.' });
+      } else {
+        res.render('student_views/student_goals', {
+          goals: student.goals,
+        });
+      }
+    });
+  },
+
+  // delete all student goals
+  deleteAllStudentGoals: (req, res) => {
+    const studentId = "S1";
+
+    Student.deleteAllGoals(studentId, (err, student) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not delete all goals.' });
+      } else {
+        res.status(200).json({ message: 'OK' });
+      }
+    });
+  },
+
+  // render admin opportunity
+  renderAdminOpportunity: (req, res) => {
+    res.render('admin_views/admin_opportunity');
+  },
+
+  // render admin settings
+  renderAdminSettings: (req, res) => {
+    res.render('admin_views/admin_settings');
+  },
+
+  // render admin profile
+  renderAdminProfile: (req, res) => {
+    res.render('admin_views/admin_profile');
   },
 
 };

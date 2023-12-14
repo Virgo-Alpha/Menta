@@ -1,0 +1,83 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+<style>
+        .add-goal-btn {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .delete-goals-btn {
+            float: right;
+        }
+    </style>
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> sidebar}}
+            <div class="content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="/add_studentGoal" class="btn btn-primary add-goal-btn">Add Goal</a>
+                    <button id="deleteGoalsBtn" class="btn btn-danger">Delete Goals</button>
+            </div>
+
+            <p style="display: None">{{_id}}</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#goals}}
+                    <tr>
+                        <td>{{.}}</td>
+                    </tr>
+                    {{/goals}}
+
+                    {{^goals}}
+                    <tr>
+                        <td colspan="3">No goals set for this student.</td>
+                    </tr>
+                    {{/goals}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Your dynamic content goes here -->
+    </main>
+    <script>
+    document.getElementById('deleteGoalsBtn').addEventListener('click', function () {
+    // Show confirmation pop-up
+    const confirmDelete = confirm('Are you sure you want to delete all your goals?');
+
+    if (confirmDelete) {
+        // If "Proceed" is clicked
+        fetch('/student_goals', {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle success, e.g., show a success message
+                alert('All goals have been deleted.');
+                // Go to student goals page
+                window.location.href = '/student_goals';
+            } else {
+                // Handle failure, e.g., show an error message
+                alert('Failed to delete goals.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting sessions.');
+        });
+    }
+    // If "Cancel" is clicked, no action is taken
+});
+
+    </script>
+</body>
+{{> footer}}

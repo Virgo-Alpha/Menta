@@ -1,0 +1,24 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> sidebar}}
+            <div class="content">
+            <h2>Add Student Goal</h2>
+            <form action="/add_studentGoal" method="POST">
+                <div class="form-group">
+                    <label for="goal">Goal:</label>
+                    <input type="text" class="form-control" id="goal" name="goal" placeholder="Enter goal">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+                <a href="/student_goals" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+</body>
+{{> footer}}

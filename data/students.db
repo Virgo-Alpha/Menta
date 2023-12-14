@@ -1,0 +1,9 @@
+{"studentId":"S1","firstName":"Student","lastName":"One","dateOfBirth":"1999-01-01","gender":"Male","studentEmail":"student1@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Computer Science","goals":[],"sessions":[],"Age":24,"_id":"FqDk7qzBmYR7kixM"}
+{"studentId":"S3","firstName":"Student","lastName":"Three","dateOfBirth":"2000-05-20","gender":"Other","studentEmail":"student3@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Social Science","goals":[],"sessions":[],"Age":23,"_id":"GsxEd7gPmHHQKHcb"}
+{"studentId":"S2","firstName":"Student","lastName":"Two","dateOfBirth":"1998-03-15","gender":"Female","studentEmail":"student2@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Electrical Engineering","goals":[],"sessions":[],"Age":25,"_id":"lYE4rMHaTbvx7fYP"}
+{"$$deleted":true,"_id":"FqDk7qzBmYR7kixM"}
+{"$$deleted":true,"_id":"GsxEd7gPmHHQKHcb"}
+{"$$deleted":true,"_id":"lYE4rMHaTbvx7fYP"}
+{"studentId":"S1","firstName":"Student","lastName":"One","dateOfBirth":"1999-01-01","gender":"Male","studentEmail":"student1@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Computer Science","goals":[],"sessions":[],"Age":24,"_id":"p8FPXcYiw8otd8Fp"}
+{"studentId":"S3","firstName":"Student","lastName":"Three","dateOfBirth":"2000-05-20","gender":"Other","studentEmail":"student3@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Social Science","goals":[],"sessions":[],"Age":23,"_id":"FWDJHug8fgtaXFSO"}
+{"studentId":"S2","firstName":"Student","lastName":"Two","dateOfBirth":"1998-03-15","gender":"Female","studentEmail":"student2@example.com","enrollmentDate":"2023-09-01","degreeProgram":"Electrical Engineering","goals":[],"sessions":[],"Age":25,"_id":"PTkM13fgBd4hipPG"}

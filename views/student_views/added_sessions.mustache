@@ -1,0 +1,52 @@
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {{! <link href="/css/about.css" rel="stylesheet"> }}
+<link href="/css/dashboard.css" rel="stylesheet">
+</head>
+{{> header}}
+<body>
+    <main class="main-content">
+    {{> sidebar}}
+            <div class="content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+    <a href="/search_studentSessions" class="btn btn-secondary">Search Sessions</a>
+
+    </div>
+
+    <p style="display: None">{{_id}}</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Session Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Venue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#sessions}}
+            <tr>
+                <td>{{sessionName}}</td>
+                <td>{{date}}</td>
+                <td>{{startTime}} - {{endTime}}</td>
+                <td>{{category}}</td>
+                <td>{{venue}}</td>
+            </tr>
+            {{/sessions}}
+
+            {{^sessions}}
+            <tr>
+                <td colspan="5">No sessions in the database.</td>
+            </tr>
+            {{/sessions}}
+        </tbody>
+    </table>
+
+        </div>
+        <!-- Your dynamic content goes here -->
+    </main>
+
+</body>
+{{> footer}}

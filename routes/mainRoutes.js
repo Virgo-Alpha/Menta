@@ -23,6 +23,15 @@ router.post('/register', mainController.register);
 router.get('/login', mainController.renderLogin);
 router.post('/login', login, mainController.handle_login);
 router.get('/logout', verify, mainController.handle_logout);
+// router.get('added_sessions', verify, mainController.renderAddedSessions);
+router.get('/student_goals', verify, mainController.renderStudentGoals);
+router.get('/add_studentGoal', verify, mainController.renderAddStudentGoal);
+router.post('/add_studentGoal', verify, mainController.addStudentGoal);
+router.delete('/student_goals', verify, mainController.deleteAllStudentGoals);
+router.get('/added_sessions', verify, mainController.renderAllStudentSessions);
+router.get('/admin_opportunity', verify, mainController.renderAdminOpportunity);
+router.get('/admin_settings', verify, mainController.renderAdminSettings);
+router.get('/admin_profile', verify, mainController.renderAdminProfile);
 
 // Students Routes
 router.get('/add_student', verify, mainController.renderAddStudent);
@@ -36,6 +45,9 @@ router.post('/search_students', verify, mainController.searchStudents);
 router.get('/search_studentSessions', verify, mainController.initialSearchStudentSessions);
 router.post('/search_studentSessions', verify, mainController.searchStudentSessions);
 router.get('/add_studentSession/:id', verify, mainController.renderAddStudentSession);
+router.get('/student_opportunity', verify, studentController.renderStudentOpportunity);
+router.get('/student_profile', verify, studentController.renderStudentProfile);
+router.get('/student_settings', verify, studentController.renderStudentSettings);
 
 router.post('/students', studentController.create);
 router.get('/students/:id', studentController.findById);
@@ -61,15 +73,5 @@ router.delete('/admin_sessions', verify_admin, mainController.deleteAll);
 router.delete('/admin_sessions/:id', verify, sessionController.delete);
 router.get('/search_sessions', verify, mainController.initialSearch);
 router.post('/search_sessions', verify, mainController.searchSessions);
-
-// ! Not yet used
-router.get('/sessions', sessionController.findSessions);
-router.post('/sessions/:name', sessionController.findByName);
-router.post('/sessions/:name', sessionController.findByMentee);
-router.post('/sessions/:category', sessionController.findByCategory);
-router.post('/sessions/:time', sessionController.findByTime);
-router.post('/sessions/:category', sessionController.findByCategory);
-router.put('/sessions/:id', sessionController.update);
-router.delete('/sessions/:id', sessionController.delete);
 
 module.exports = router;

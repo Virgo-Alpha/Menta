@@ -107,7 +107,10 @@ class Student {
       }
 
       // Assuming 'sessions' is an array in the Student model
-    student.sessions.push(sessionData); // Add session data to the student's sessions array
+      var set = new Set(student.sessions);
+      set.add(sessionData);
+      student.sessions = Array.from(set);
+    // student.sessions.push(sessionData); // Add session data to the student's sessions array
       // Session added successfully
       console.log('Session added to student:', student);
 
@@ -162,6 +165,65 @@ class Student {
         callback(err);
       } else {
         callback(null, numRemoved);
+      }
+    });
+  }
+
+  // view goals
+  static viewGoals(studentId, callback) {
+    // Retrieve the student record from the database
+    studentDB.findOne({ studentId: studentId }, (err, student) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, student.goals);
+      }
+    });
+  }
+
+  // add goals
+  static addGoals(studentId, goalData, callback) {
+    Student.findByStudentId(studentId, (err, student) => {
+      if (err || !student) {
+        console.error('Error finding student:', err);
+        // Handle error: student not found
+        //return;
+      }
+
+      // Assuming 'goals' is an array in the Student model
+      student.goals.push(goalData); // Add goal data to the student's goals array
+      // Goal added successfully
+      // console.log('Goal added to student:', student);
+
+      // Update the student record in the database
+      studentDB.update({ studentId: studentId }, { $set: student }, {}, (err, numReplaced) => {
+        if (err) {
+          callback(err);
+        } else {
+          studentDB.findOne({ _id: student._id }, (err, updatedStudent) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, updatedStudent); // Pass the updated student to the callback
+            }
+          });
+        }
+      });
+      
+      callback(null, student);
+    });
+  }
+
+  // delete all goals
+  static deleteAllGoals(studentId, callback) {
+    // Retrieve the student record from the database
+    studentDB.findOne({ studentId: studentId }, (err, student) => {
+      if (err) {
+        callback(err);
+      } else {
+        student.goals = [];
+        Student.update(studentId, student, callback);
+        // callback(null, student);
       }
     });
   }

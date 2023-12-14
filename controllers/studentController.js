@@ -104,6 +104,21 @@ const studentController = {
     });
   },
 
+  // render student_oppotunity
+  renderStudentOpportunity: (req, res) => {
+    res.render('student_views/student_opportunity');
+  },
+
+  // render student profile
+  renderStudentProfile: (req, res) => {
+    res.render('student_views/student_profile');
+  },
+
+  // render student settings
+  renderStudentSettings: (req, res) => {
+    res.render('student_views/student_settings');
+  },
+
 };
 
 module.exports = studentController;
