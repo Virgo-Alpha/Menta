@@ -16,7 +16,7 @@ const mainController = {
 
   // register
   register: (req, res) => {
-    const { studentId, username, password, firstName, lastName, email, dateOfBirth, gender, enrollmentDate, degreeProgram, phoneNumber, role} = req.body;
+    const { username, password, firstName, lastName, email, phoneNumber, role, studentId, dateOfBirth, gender, enrollmentDate, degreeProgram} = req.body;
   
     if (!username || !password) {
       res.status(401).send('No user or password.');
@@ -35,24 +35,25 @@ const mainController = {
       }
   
       userDao.create(
-        studentId,
         username,
         password,
         firstName,
         lastName,
         email,
+        phoneNumber,
+        role,
+        studentId,
         dateOfBirth,
         gender,
         enrollmentDate,
         degreeProgram,
-        phoneNumber,
-        role,
-        (err, user) => {
+        function (err) {
           if (err) {
             res.render('register', { error: 'Could not register user.' });
           } else {
+            console.log('User created:', username);
             res.render('login', {
-              error: 'User: ' + user.username + ' successfully created. Please login.',
+              error: 'User: ' + username + ' successfully created. Please login.',
             });
           }
         }

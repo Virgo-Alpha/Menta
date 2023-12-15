@@ -127,7 +127,7 @@ class UserDAO {
     const that = this;
     bcrypt.hash(password, saltRounds).then(function (hash) {
       var entry = {
-        user: username,
+        username: username,
         password: hash,
         firstName: firstName,
         lastName: lastName,
@@ -153,32 +153,27 @@ class UserDAO {
             if (err) {
                 console.log("Can't insert student:", username);
             } else {
-                // console.log("Student inserted:", username);
+                console.log("Student inserted:", username);
             }
         });
       }
       UserDB.insert(entry, function (err) {
         if (err) {
           console.log("Can't insert user:", username);
+          callback(err, null);
         } else {
-            // console.log("User inserted:", username);
-            return entry;
-            
+            console.log("User inserted:", username);
         }
       });
-      // return the new user
-        //return callback(null, entry);
-    })
-    // .catch(function (err) {
-    //   console.log("Error hashing password for user", username);
-    //   return callback(err);
-    // });
+      callback(null, entry);
     }
+    );
+  }
 
   lookup(user, cb) {
     UserDB.find(
       {
-        user: user,
+        username: user,
       },
       function (err, entries) {
         if (err) {
