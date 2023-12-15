@@ -47,13 +47,13 @@ const mainController = {
         gender,
         enrollmentDate,
         degreeProgram,
-        function (err) {
+        function (err, newUser) {
           if (err) {
             res.render('register', { error: 'Could not register user.' });
           } else {
             console.log('User created:', username);
             res.render('login', {
-              error: 'User: ' + username + ' successfully created. Please login.',
+              error: 'User: ' + newUser.username + ' successfully created. Please login.',
             });
           }
         }

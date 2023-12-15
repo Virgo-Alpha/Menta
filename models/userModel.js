@@ -114,7 +114,7 @@ class UserDAO {
           console.error('Error creating student:', err);
           // Handle the error here
         } else {
-          console.log('Student created:', user);
+          console.log('Student created:', user.username);
           // Handle successful student creation here
         }
       });
@@ -157,15 +157,20 @@ class UserDAO {
             }
         });
       }
-      UserDB.insert(entry, function (err) {
+      UserDB.insert(entry, (err, newEntry) => {
         if (err) {
-          console.log("Can't insert user:", username);
-          callback(err, null);
+            console.log("Can't insert user:", username);
+            if (callback) {
+                callback(err);
+            }
         } else {
             console.log("User inserted:", username);
+            if (callback) {
+                callback(null, newEntry);
+            }
+            return newEntry;
         }
       });
-      callback(null, entry);
     }
     );
   }
