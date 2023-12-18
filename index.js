@@ -1,13 +1,8 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
-const authRoutes = require('./routes/auth');
-const authMiddleware = require('./middlewares/authMiddleware');
 const passport = require('./config/passport');
-const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const userModel = require('./models/userModel'); // Your user model path
-
 
 const mainRoutes = require('./routes/mainRoutes'); // Import the mainRoutes
 
@@ -19,7 +14,12 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 // Set up session middleware
-app.use(session({ secret: 'my_actual_secret', resave: false, saveUninitialized: false }));
+app.use(session({ 
+  secret: 'my_actual_secret', 
+  resave: false, 
+  saveUninitialized: false,
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -10,6 +10,17 @@ const mentorController = require('../controllers/mentorController');
 const sessionController = require('../controllers/sessionController');
 const authController = require('../controllers/authController');
 const { ensureAuthenticated, ensureAdmin, ensureStudent } = require('../middlewares/authMiddleware');
+const sessionTimeout = require('../middlewares/sessionTimeout');
+
+// Route for the homepage ("/")
+router.get('/', mainController.renderHomePage);
+router.get('/register', mainController.renderRegister);
+router.post('/register', mainController.register);
+router.get('/login', authController.renderLogin);
+router.post('/login', authController.handle_login);
+router.get('/logout', ensureAuthenticated, authController.handle_logout);
+
+router.use(sessionTimeout); // Mount the sessionTimeout middleware
 
 // admin routes
 router.get('/admin_dashboard', ensureAdmin, mainController.renderAdminDashboard);
@@ -21,18 +32,9 @@ router.get('/admin_settings', ensureAdmin, mainController.renderAdminSettings);
 router.get('/admin_profile', ensureAdmin, mainController.renderAdminProfile);
 router.get('/admin_report', ensureAdmin, mainController.renderAdminReport);
 
-// Route for the homepage ("/")
-router.get('/', mainController.renderHomePage);
+
 router.get('/student_dashboard', mainController.renderStudentDashboard);
 router.get('/student_sessions', ensureAuthenticated, mainController.renderStudentSessions);
-router.get('/register', mainController.renderRegister);
-router.post('/register', mainController.register);
-router.get('/login', authController.renderLogin);
-
-router.post('/login', authController.handle_login);
-  
-router.get('/logout', ensureAuthenticated, authController.handle_logout);
-
 router.get('/student_goals', ensureAuthenticated, mainController.renderStudentGoals);
 router.get('/add_studentGoal', ensureAuthenticated, mainController.renderAddStudentGoal);
 router.post('/add_studentGoal', ensureAuthenticated, mainController.addStudentGoal);

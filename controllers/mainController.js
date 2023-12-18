@@ -93,12 +93,12 @@ const mainController = {
 
   // render student dashboard
   renderStudentDashboard: (req, res) => {
-    res.render('student_views/student_dashboard');
+    res.render('student_views/student_dashboard', { username: req.user.username });
   },
 
   // render admin dashboard
   renderAdminDashboard: (req, res) => {
-    res.render('admin_views/admin_dashboard');
+    res.render('admin_views/admin_dashboard', { username: req.user.username });
   },
 
   // render admin sessions view
@@ -468,6 +468,7 @@ const mainController = {
       } else {
 
           var student_id = "S1";
+          console.log("student_id: " + req.user._id);
 
           // Add the student_id to the session
         Student.findByStudentId(student_id, (err, student) => {
