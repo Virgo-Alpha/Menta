@@ -1,7 +1,7 @@
 // mainRoutes.js
 const express = require('express');
 const router = express.Router();
-
+const session = require('express-session');
 const passport = require('../config/passport');
 
 const mainController = require('../controllers/mainController');

@@ -1,16 +1,40 @@
-         
-            <!-- Chart canvas elements -->
-            <div>
-                <canvas id="attendancePieChart" width="400" height="400"></canvas>
-            </div>
-            <div>
-                <canvas id="enrollmentScatterPlot" width="400" height="400"></canvas>
-            </div>
-            <div>
-                <canvas id="admissionLineChart" width="400" height="400"></canvas>
-            </div>
+<div class="dashboard">
+    <div class="chart">
+        <canvas id="attendancePieChart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="enrollmentScatterPlot"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="admissionLineChart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="attendanceDoughnutChart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="studentRadarChart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="studentBarChart"></canvas>
+        </div>
+</div>
 
-<!-- Chart script -->
+<style>
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-gap: 20px;
+        background-color: #333;
+        padding: 20px;
+    }
+
+    .chart {
+        background-color: #444;
+        border-radius: 5px;
+        padding: 20px;
+    }
+</style>
+
 <script>
 // Import the generated chart objects
         const pieChart = {
@@ -81,12 +105,84 @@
             }
         };
 
-        
+    // Sample data
+    const doughnutChartData = [60, 40];
+    const radarChartData = {
+        labels: ['35+', '30 - 35', '25 - 30', '20 - 24', '18 - 20', '<18'],
+        datasets: [{
+            label: 'Student Age groups',
+            data: [70, 80, 65, 75, 90, 85],
+            backgroundColor: 'rgba(255, 159, 64, 0.5)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1
+        }]
+    };
 
-        // Render the charts using Chart.js
-        new Chart(document.getElementById('attendancePieChart'), pieChart);
-        new Chart(document.getElementById('enrollmentScatterPlot'), scatterPlot);
-        new Chart(document.getElementById('admissionLineChart'), lineChart);
+    const doughnutChart = {
+        type: 'doughnut',
+        data: {
+            labels: ['Active', 'Inactive'],
+            datasets: [{
+                data: doughnutChartData,
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)', // Blue for attended
+                    'rgba(255, 99, 132, 0.7)' // Red for missed
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    };
 
+    const radarChart = {
+        type: 'radar',
+        data: radarChartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    };
+
+    const barchart = {
+        type: 'bar',
+        data: {
+            labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+            datasets: [{
+                label: 'Enrolled mentees by year',
+                data: [70, 80, 65, 75, 90, 85],
+                backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    };
+
+    // Render the charts
+    new Chart(document.getElementById('attendancePieChart'), pieChart);
+    new Chart(document.getElementById('enrollmentScatterPlot'), scatterPlot);
+    new Chart(document.getElementById('admissionLineChart'), lineChart);
+    new Chart(document.getElementById('attendanceDoughnutChart'), doughnutChart);
+    new Chart(document.getElementById('studentRadarChart'), radarChart);
+    new Chart(document.getElementById('studentBarChart'), barchart);
 </script>
-
