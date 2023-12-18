@@ -122,4 +122,69 @@ class Mentor {
   }
 }
 
+const mentors = [
+  {
+    firstName: 'John',
+    lastName: 'Doe',
+    dateOfBirth: '1990-05-15',
+    gender: 'Male',
+    profession: 'Software Engineer',
+    industry: 'Technology',
+  },
+  {
+    firstName: 'Jane',
+    lastName: 'Smith',
+    dateOfBirth: '1985-10-20',
+    gender: 'Female',
+    profession: 'Marketing Manager',
+    industry: 'Marketing',
+  },
+  {
+    firstName: 'Alice',
+    lastName: 'Johnson',
+    dateOfBirth: '1992-08-25',
+    gender: 'Female',
+    profession: 'Data Analyst',
+    industry: 'Data Science',
+  },
+  {
+    firstName: 'Bob',
+    lastName: 'Williams',
+    dateOfBirth: '1988-03-12',
+    gender: 'Male',
+    profession: 'Financial Advisor',
+    industry: 'Finance',
+  },
+  {
+    firstName: 'Emma',
+    lastName: 'Brown',
+    dateOfBirth: '1995-12-03',
+    gender: 'Female',
+    profession: 'Graphic Designer',
+    industry: 'Design',
+  },
+];
+
+// clear mentors
+Mentor.deleteAll((err, numRemoved) => {
+  if (err) {
+    console.error('Error deleting mentors:', err);
+  } else {
+    console.log(`Deleted ${numRemoved} mentors`);
+  }
+});
+
+mentors.forEach(mentor => {
+  Mentor.create(
+    mentor,
+    (err, newMentor) => {
+      if (err) {
+        console.error('Error creating mentor:', err);
+      } else {
+        // console.log('Mentor created:', newMentor);
+      }
+    }
+  );
+});
+
 module.exports = Mentor;

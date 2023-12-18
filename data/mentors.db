@@ -1,2 +1,9 @@
 {"firstName":"Ruth","lastName":"K","dateOfBirth":"1988-09-28","gender":"Female","profession":"Teacher","industry":"Education","Age":35,"_id":"8N4tamJJ0ETqNo1c"}
 {"firstName":"Benson","lastName":"Mugure","dateOfBirth":"1978-08-27","gender":"Male","profession":"Engineer","industry":"Data","Age":45,"_id":"rqQHPEQmG5zru1vj"}
+{"$$deleted":true,"_id":"8N4tamJJ0ETqNo1c"}
+{"$$deleted":true,"_id":"rqQHPEQmG5zru1vj"}
+{"firstName":"John","lastName":"Doe","dateOfBirth":"1990-05-15","gender":"Male","profession":"Software Engineer","industry":"Technology","Age":33,"_id":"OySgMOQcInaMD5pu"}
+{"firstName":"Jane","lastName":"Smith","dateOfBirth":"1985-10-20","gender":"Female","profession":"Marketing Manager","industry":"Marketing","Age":38,"_id":"ZkHMQs9zk3ws5USH"}
+{"firstName":"Alice","lastName":"Johnson","dateOfBirth":"1992-08-25","gender":"Female","profession":"Data Analyst","industry":"Data Science","Age":31,"_id":"8Vp0jRz4kO3tFOqO"}
+{"firstName":"Bob","lastName":"Williams","dateOfBirth":"1988-03-12","gender":"Male","profession":"Financial Advisor","industry":"Finance","Age":35,"_id":"W7fsOWvdMXBENF1F"}
+{"firstName":"Emma","lastName":"Brown","dateOfBirth":"1995-12-03","gender":"Female","profession":"Graphic Designer","industry":"Design","Age":28,"_id":"o5jmGfRe3fWboEkA"}

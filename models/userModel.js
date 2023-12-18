@@ -102,7 +102,7 @@ class UserDAO {
           console.error('Error creating admin:', err);
           // Handle the error here
         } else {
-          console.log('Admin created:', user);
+          //console.log('Admin created:', user);
           // Handle successful admin creation here
         }
       });
@@ -114,7 +114,7 @@ class UserDAO {
           console.error('Error creating student:', err);
           // Handle the error here
         } else {
-          console.log('Student created:', user.username);
+          //console.log('Student created:', user.username);
           // Handle successful student creation here
         }
       });
@@ -153,7 +153,7 @@ class UserDAO {
             if (err) {
                 console.log("Can't insert student:", username);
             } else {
-                console.log("Student inserted:", username);
+                //console.log("Student inserted:", username);
             }
         });
       }
@@ -164,7 +164,7 @@ class UserDAO {
                 callback(err);
             }
         } else {
-            console.log("User inserted:", username);
+            //console.log("User inserted:", username);
             if (callback) {
                 callback(null, newEntry);
             }

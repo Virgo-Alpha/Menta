@@ -2,7 +2,7 @@
 
 function sessionTimeout(req, res, next) {
   const maxIdleTime = 1 * 60 * 1000; // ! 1 hour in milliseconds
-  const lastActivity = req.session.lastActivity || Date.now();
+  let lastActivity = req.session.lastActivity || Date.now();
   console.log('lastActivity: ' + lastActivity);
 
   const currentTime = Date.now();

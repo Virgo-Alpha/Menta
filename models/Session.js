@@ -139,4 +139,140 @@ class Session {
 }
 
 
+// Creating 10 different sessions
+const sessions = [
+  {
+    sessionName: 'Grad School Prep',
+    date: '2023-12-15',
+    startTime: '09:00',
+    endTime: '11:00',
+    category: 'Grad School',
+    venue: 'Virtual',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'STAR Resume Review',
+    date: '2023-12-16',
+    startTime: '10:00',
+    endTime: '12:00',
+    category: 'Resume Review',
+    venue: 'Office',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'How to be an Entrepreneur',
+    date: '2023-12-17',
+    startTime: '11:00',
+    endTime: '13:00',
+    category: 'Entrepreneurship',
+    venue: 'Virtual',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Lifelong Career Advice',
+    date: '2023-12-18',
+    startTime: '12:00',
+    endTime: '14:00',
+    category: 'Career advice',
+    venue: 'Office',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Mock Interview 1',
+    date: '2023-12-19',
+    startTime: '13:00',
+    endTime: '15:00',
+    category: 'Mock Interview',
+    venue: 'Virtual',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Mock Interview 2',
+    date: '2023-12-20',
+    startTime: '14:00',
+    endTime: '16:00',
+    category: 'Mock Interview',
+    venue: 'Office',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Session 7',
+    date: '2023-12-21',
+    startTime: '15:00',
+    endTime: '17:00',
+    category: 'General',
+    venue: 'Virtual',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Session 8',
+    date: '2023-12-22',
+    startTime: '16:00',
+    endTime: '18:00',
+    category: 'General',
+    venue: 'Office',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Session 9',
+    date: '2023-12-23',
+    startTime: '17:00',
+    endTime: '19:00',
+    category: 'General',
+    venue: 'Virtual',
+    mandatory: true,
+    menteeList: [],
+  },
+  {
+    sessionName: 'Session 10',
+    date: '2023-12-24',
+    startTime: '18:00',
+    endTime: '20:00',
+    category: 'General',
+    venue: 'Office',
+    mandatory: true,
+    menteeList: [],
+  },
+];
+// clear Sessions in DB
+Session.deleteAll(function(err, numRemoved) {
+  if (err) {
+    console.error('Error deleting sessions:', err);
+  } else {
+    console.log('Sessions deleted:', numRemoved);
+  }
+});
+
+// Inserting sessions into the database
+sessions.forEach(session => {
+  const newSession = new Session(
+    session.sessionName,
+    session.date,
+    session.startTime,
+    session.endTime,
+    session.category,
+    session.venue,
+    session.mandatory,
+    session.menteeList
+  );
+
+  Session.create(newSession, (err, createdSession) => {
+    if (err) {
+      console.error('Error creating session:', err);
+    } else {
+      // console.log('Session created:', createdSession);
+    }
+  });
+});
+
+
+
 module.exports = Session;
