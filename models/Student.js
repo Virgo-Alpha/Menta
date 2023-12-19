@@ -50,10 +50,28 @@ class Student {
       if (err) {
         callback(err);
       } else {
+        console.log(students);
         callback(null, students);
       }
     });
-  }  
+  }
+
+  // search students by firstName, lastName
+  static searchStudentsByName(firstName, lastName, callback) {
+    const query = {
+      firstName: { $regex: new RegExp(firstName, 'i') },
+      lastName: { $regex: new RegExp(lastName, 'i') },
+    }
+  
+    studentDB.find(query, (err, students) => {
+      if (err) {
+        callback(err);
+      } else {
+        // console.log(students);
+        callback(null, students);
+      }
+    });
+  }
 
   // Find a student by their ID
   static findById(student_id, callback) {
@@ -74,6 +92,7 @@ class Student {
       if (err) {
         callback(err);
       } else {
+        //console.log("Student sessions: " + student.sessions);
         callback(null, student);
       }
     });
@@ -110,7 +129,7 @@ class Student {
       var set = new Set(student.sessions);
       set.add(sessionData);
       student.sessions = Array.from(set);
-    // student.sessions.push(sessionData); // Add session data to the student's sessions array
+
       // Session added successfully
       console.log('Session added to student:', student);
 
@@ -129,7 +148,6 @@ class Student {
         }
       });
       
-      callback(null, student);
     });
 }
 

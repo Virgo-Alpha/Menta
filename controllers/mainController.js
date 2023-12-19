@@ -51,7 +51,7 @@ const mainController = {
           if (err) {
             res.render('register', { error: 'Could not register user.' });
           } else {
-            console.log('User created:', username);
+            //console.log('User created:', username);
             res.render('login', {
               error: 'User: ' + newUser.username + ' successfully created. Please login.',
             });
@@ -467,25 +467,22 @@ const mainController = {
         res.status(500).json({ error: 'Could not find the session.' });
       } else {
 
-          var student_id = "S1";
-          console.log("student_id: " + req.user._id);
-
-          // Add the student_id to the session
-        Student.findByStudentId(student_id, (err, student) => {
+        Student.searchStudentsByName(req.user.firstName, req.user.lastName, (err, students) => {
           if (err) {
             res.status(500).json({ error: 'Could not find the student.' });
           } else {
-            // update the session
-            // Session.updateMenteeList(sessionId, student._id, (err, session) => {
-            //   if (err) {
-            //     res.status(500).json({ error: 'Could not update session.' });
-            //   }
-            // });
+            const studentId = students[0].studentId;
+
+          // Add the student_id to the session
+        Student.findByStudentId(studentId, (err, student) => {
+          if (err) {
+            res.status(500).json({ error: 'Could not find the student.' });
+          } else {
           }
         });
 
         // update the student session
-        Student.updateSessions(student_id, sessionId, (err, student) => {
+        Student.updateSessions(studentId, sessionId, (err, student) => {
           if (err) {
             res.status(500).json({ error: 'Could not update student session.' });
           } else {
@@ -504,40 +501,53 @@ const mainController = {
         });
       }
     });
+  }
+  }
+  );
   },
 
   // render all student sessions
   renderAllStudentSessions: (req, res) => {
-    const studentId = "S1";
+
+    // find student using first name
+    Student.searchStudentsByName(req.user.firstName, req.user.lastName, (err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        const studentId = students[0].studentId;
 
     Student.findByStudentId(studentId, (err, student) => {
       if (err) {
         res.status(500).json({ error: 'Could not find the student.' });
       } else {
-        // find goal by _id
-        var sessions = [];
+        // console.log("student sessions: " + student.sessions);
 
-        student.sessions.forEach(sessionId => {
-          Session.findById(sessionId, (err, session) => {
-            if (err) {
-              res.status(500).json({ error: 'Could not find the session.' });
-            } else {
-              sessions.push(session);
-            }
-          });
-        });
+        // find sessions byIds
+        Session.findByIds(student.sessions, (err, sessions) => {
+          if (err) {
+            res.status(500).json({ error: 'Could not find the sessions.' });
+          } else {
 
-
-        res.render('student_views/added_sessions', {
-          sessions,
-        });
+            res.render('student_views/added_sessions', { sessions });
+          }
+        }
+        );
       }
-    });
+    }
+    );
+  }
+  }
+  );
   },
+
 
   // render student goals
   renderStudentGoals: (req, res) => {
-    const studentId = "S1"
+    Student.searchStudentsByName(req.user.firstName, req.user.lastName, (err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        const studentId = students[0].studentId;
 
     Student.viewGoals(studentId, (err, student) => {
       if (err) {
@@ -548,6 +558,9 @@ const mainController = {
         });
       }
     });
+  }
+  }
+  );
   },
 
   // render add student goal
@@ -557,7 +570,12 @@ const mainController = {
 
   // add Student Goal
   addStudentGoal: (req, res) => {
-    const studentId = "S1";
+    Student.searchStudentsByName(req.user.firstName, req.user.lastName, (err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        const studentId = students[0].studentId;
+
     const goalData = req.body.goal;
 
     Student.addGoals(studentId, goalData, (err, student) => {
@@ -569,11 +587,18 @@ const mainController = {
         });
       }
     });
+  }
+  }
+  );
   },
 
   // delete all student goals
   deleteAllStudentGoals: (req, res) => {
-    const studentId = "S1";
+    Student.searchStudentsByName(req.user.firstName, req.user.lastName, (err, students) => {
+      if (err) {
+        res.status(500).json({ error: 'Could not find the student.' });
+      } else {
+        const studentId = students[0].studentId;
 
     Student.deleteAllGoals(studentId, (err, student) => {
       if (err) {
@@ -582,6 +607,9 @@ const mainController = {
         res.status(200).json({ message: 'OK' });
       }
     });
+  }
+  }
+  );
   },
 
   // render admin opportunity

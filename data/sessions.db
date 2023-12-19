@@ -1,30 +1,30 @@
-{"sessionName":"How to be an Entrepreneur","date":{"$$date":1702771200000},"startTime":"11:00","endTime":"13:00","category":"Entrepreneurship","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"4I3osDZNMLNgKNot"}
-{"sessionName":"STAR Resume Review","date":{"$$date":1702684800000},"startTime":"10:00","endTime":"12:00","category":"Resume Review","venue":"Office","mandatory":true,"menteeList":0,"_id":"DVp3wapF17KQZuWS"}
-{"sessionName":"Lifelong Career Advice","date":{"$$date":1702857600000},"startTime":"12:00","endTime":"14:00","category":"Career advice","venue":"Office","mandatory":true,"menteeList":0,"_id":"SeRl4z2Z2fCdCFTz"}
-{"sessionName":"Session 8","date":{"$$date":1703203200000},"startTime":"16:00","endTime":"18:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"fcYsD77HvAKxKox0"}
-{"sessionName":"Session 7","date":{"$$date":1703116800000},"startTime":"15:00","endTime":"17:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"iVwPUmyP7Mrc4uY3"}
-{"sessionName":"Grad School Prep","date":{"$$date":1702598400000},"startTime":"09:00","endTime":"11:00","category":"Grad School","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"lyHgMPDXeV6U6Qym"}
-{"sessionName":"Mock Interview 1","date":{"$$date":1702944000000},"startTime":"13:00","endTime":"15:00","category":"Mock Interview","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"nZIhUegNUxsIxnCc"}
-{"sessionName":"Mock Interview 2","date":{"$$date":1703030400000},"startTime":"14:00","endTime":"16:00","category":"Mock Interview","venue":"Office","mandatory":true,"menteeList":0,"_id":"p1dqnBgVn1qnqwnM"}
-{"sessionName":"Session 9","date":{"$$date":1703289600000},"startTime":"17:00","endTime":"19:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"z2o6kb8Z1a4zVVRp"}
-{"sessionName":"Session 10","date":{"$$date":1703376000000},"startTime":"18:00","endTime":"20:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"zcaQDc3G53gNEao3"}
-{"$$deleted":true,"_id":"4I3osDZNMLNgKNot"}
-{"$$deleted":true,"_id":"DVp3wapF17KQZuWS"}
-{"$$deleted":true,"_id":"SeRl4z2Z2fCdCFTz"}
-{"$$deleted":true,"_id":"fcYsD77HvAKxKox0"}
-{"$$deleted":true,"_id":"iVwPUmyP7Mrc4uY3"}
-{"$$deleted":true,"_id":"lyHgMPDXeV6U6Qym"}
-{"$$deleted":true,"_id":"nZIhUegNUxsIxnCc"}
-{"$$deleted":true,"_id":"p1dqnBgVn1qnqwnM"}
-{"$$deleted":true,"_id":"z2o6kb8Z1a4zVVRp"}
-{"$$deleted":true,"_id":"zcaQDc3G53gNEao3"}
-{"sessionName":"Grad School Prep","date":{"$$date":1702598400000},"startTime":"09:00","endTime":"11:00","category":"Grad School","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"MqyLRyk98TapoPIJ"}
-{"sessionName":"STAR Resume Review","date":{"$$date":1702684800000},"startTime":"10:00","endTime":"12:00","category":"Resume Review","venue":"Office","mandatory":true,"menteeList":0,"_id":"kJJrMTPUpFQJQ0dn"}
-{"sessionName":"How to be an Entrepreneur","date":{"$$date":1702771200000},"startTime":"11:00","endTime":"13:00","category":"Entrepreneurship","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"HSU68hwEjw4zxuMD"}
-{"sessionName":"Lifelong Career Advice","date":{"$$date":1702857600000},"startTime":"12:00","endTime":"14:00","category":"Career advice","venue":"Office","mandatory":true,"menteeList":0,"_id":"eYPD2ZxCTxa3MbdF"}
-{"sessionName":"Mock Interview 1","date":{"$$date":1702944000000},"startTime":"13:00","endTime":"15:00","category":"Mock Interview","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"3UyorGAqjMtnIHBK"}
-{"sessionName":"Mock Interview 2","date":{"$$date":1703030400000},"startTime":"14:00","endTime":"16:00","category":"Mock Interview","venue":"Office","mandatory":true,"menteeList":0,"_id":"eNnFhbqdB5C8u9Kh"}
-{"sessionName":"Session 7","date":{"$$date":1703116800000},"startTime":"15:00","endTime":"17:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"TI7LYnbqfblVbQoy"}
-{"sessionName":"Session 8","date":{"$$date":1703203200000},"startTime":"16:00","endTime":"18:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"JQxcY1c2q936eWVy"}
-{"sessionName":"Session 9","date":{"$$date":1703289600000},"startTime":"17:00","endTime":"19:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"UkmDr30Ii3XY4tex"}
-{"sessionName":"Session 10","date":{"$$date":1703376000000},"startTime":"18:00","endTime":"20:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"Knqnnc4TWJNrrGii"}
+{"sessionName":"Session 10","date":{"$$date":1703376000000},"startTime":"18:00","endTime":"20:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"33zYleiJrBYOkzw3"}
+{"sessionName":"Session 8","date":{"$$date":1703203200000},"startTime":"16:00","endTime":"18:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"4IgVRyxiYdwcipGo"}
+{"sessionName":"How to be an Entrepreneur","date":{"$$date":1702771200000},"startTime":"11:00","endTime":"13:00","category":"Entrepreneurship","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"EmKe64JzcxMvd9As"}
+{"sessionName":"STAR Resume Review","date":{"$$date":1702684800000},"startTime":"10:00","endTime":"12:00","category":"Resume Review","venue":"Office","mandatory":true,"menteeList":0,"_id":"cV54ghrguaWKoRAX"}
+{"sessionName":"Mock Interview 2","date":{"$$date":1703030400000},"startTime":"14:00","endTime":"16:00","category":"Mock Interview","venue":"Office","mandatory":true,"menteeList":0,"_id":"fovSojJjNXmVuXmm"}
+{"sessionName":"Lifelong Career Advice","date":{"$$date":1702857600000},"startTime":"12:00","endTime":"14:00","category":"Career advice","venue":"Office","mandatory":true,"menteeList":0,"_id":"oliNmQHPawlnmgEQ"}
+{"sessionName":"Grad School Prep","date":{"$$date":1702598400000},"startTime":"09:00","endTime":"11:00","category":"Grad School","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"rRWsf6fdsOwRwy6I"}
+{"sessionName":"Session 7","date":{"$$date":1703116800000},"startTime":"15:00","endTime":"17:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"vrzI32OSHbj5a5dq"}
+{"sessionName":"Session 9","date":{"$$date":1703289600000},"startTime":"17:00","endTime":"19:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"wWvMLYzu1Qr330Ya"}
+{"sessionName":"Mock Interview 1","date":{"$$date":1702944000000},"startTime":"13:00","endTime":"15:00","category":"Mock Interview","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"yPDjYTq0Iwly3der"}
+{"$$deleted":true,"_id":"33zYleiJrBYOkzw3"}
+{"$$deleted":true,"_id":"4IgVRyxiYdwcipGo"}
+{"$$deleted":true,"_id":"EmKe64JzcxMvd9As"}
+{"$$deleted":true,"_id":"cV54ghrguaWKoRAX"}
+{"$$deleted":true,"_id":"fovSojJjNXmVuXmm"}
+{"$$deleted":true,"_id":"oliNmQHPawlnmgEQ"}
+{"$$deleted":true,"_id":"rRWsf6fdsOwRwy6I"}
+{"$$deleted":true,"_id":"vrzI32OSHbj5a5dq"}
+{"$$deleted":true,"_id":"wWvMLYzu1Qr330Ya"}
+{"$$deleted":true,"_id":"yPDjYTq0Iwly3der"}
+{"sessionName":"Grad School Prep","date":{"$$date":1702598400000},"startTime":"09:00","endTime":"11:00","category":"Grad School","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"G2i3XskLN33OcSCn"}
+{"sessionName":"STAR Resume Review","date":{"$$date":1702684800000},"startTime":"10:00","endTime":"12:00","category":"Resume Review","venue":"Office","mandatory":true,"menteeList":0,"_id":"H60rKOYf4p20sqtB"}
+{"sessionName":"How to be an Entrepreneur","date":{"$$date":1702771200000},"startTime":"11:00","endTime":"13:00","category":"Entrepreneurship","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"hJbVZLaEodwPvF98"}
+{"sessionName":"Lifelong Career Advice","date":{"$$date":1702857600000},"startTime":"12:00","endTime":"14:00","category":"Career advice","venue":"Office","mandatory":true,"menteeList":0,"_id":"sa4hvr625CqexRTD"}
+{"sessionName":"Mock Interview 1","date":{"$$date":1702944000000},"startTime":"13:00","endTime":"15:00","category":"Mock Interview","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"njXSUXuvzfLFrXi5"}
+{"sessionName":"Mock Interview 2","date":{"$$date":1703030400000},"startTime":"14:00","endTime":"16:00","category":"Mock Interview","venue":"Office","mandatory":true,"menteeList":0,"_id":"hu7mg3aNZqV33ZUv"}
+{"sessionName":"Session 7","date":{"$$date":1703116800000},"startTime":"15:00","endTime":"17:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"qtWvQfCHDfbUa3FN"}
+{"sessionName":"Session 8","date":{"$$date":1703203200000},"startTime":"16:00","endTime":"18:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"ooTfp8Vrw51D5CEM"}
+{"sessionName":"Session 9","date":{"$$date":1703289600000},"startTime":"17:00","endTime":"19:00","category":"General","venue":"Virtual","mandatory":true,"menteeList":0,"_id":"dzHP0Mh6NMoxCN5R"}
+{"sessionName":"Session 10","date":{"$$date":1703376000000},"startTime":"18:00","endTime":"20:00","category":"General","venue":"Office","mandatory":true,"menteeList":0,"_id":"oxMQtnWCq9EmyMAG"}

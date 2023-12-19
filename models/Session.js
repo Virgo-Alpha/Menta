@@ -112,7 +112,19 @@ class Session {
       if (err) {
         callback(err);
       } else {
+        console.log(session);
         callback(null, session);
+      }
+    });
+  }
+
+  // find multiple by Id
+  static findByIds(sessionIds, callback) {
+    sessionDB.find({ _id: { $in: sessionIds } }, (err, sessions) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, sessions);
       }
     });
   }
