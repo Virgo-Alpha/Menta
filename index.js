@@ -18,7 +18,20 @@ app.use(session({
   secret: 'my_actual_secret', 
   resave: false, 
   saveUninitialized: false,
+  cookie: { expires: 60000 },
 }));
+
+// If timed out, render home page
+app.use(function(req, res, next) {
+  const currentTime = Date.now();
+
+  if (currentTime === req.session.cookie.expires) {
+    console.log('Session timed out');
+    res.render('login', {error: 'Session timed out. Please log in...'});
+  } else {
+    next();
+  }
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

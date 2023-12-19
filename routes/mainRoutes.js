@@ -10,7 +10,6 @@ const mentorController = require('../controllers/mentorController');
 const sessionController = require('../controllers/sessionController');
 const authController = require('../controllers/authController');
 const { ensureAuthenticated, ensureAdmin, ensureStudent } = require('../middlewares/authMiddleware');
-const sessionTimeout = require('../middlewares/sessionTimeout');
 
 // Route for the homepage ("/")
 router.get('/', mainController.renderHomePage);
@@ -19,8 +18,6 @@ router.post('/register', mainController.register);
 router.get('/login', authController.renderLogin);
 router.post('/login', authController.handle_login);
 router.get('/logout', ensureAuthenticated, authController.handle_logout);
-
-router.use(sessionTimeout); // Mount the sessionTimeout middleware
 
 // admin routes
 router.get('/admin_dashboard', ensureAdmin, mainController.renderAdminDashboard);

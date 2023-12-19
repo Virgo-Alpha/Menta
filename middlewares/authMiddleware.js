@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 exports.ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.render('login', {error: 'You must be logged in to access this page'});
+    res.render('login', {error: 'You must be logged in to access this page. Session might have been timed out. Please log in...'});
   }
   
 exports.ensureAdmin = function (req, res, next) {
