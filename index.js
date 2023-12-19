@@ -18,7 +18,7 @@ app.use(session({
   secret: 'my_actual_secret', 
   resave: false, 
   saveUninitialized: false,
-  cookie: { expires: 60000 },
+  cookie: { expires: 60000 * 5 }, // 5 minutes
 }));
 
 // If timed out, render home page

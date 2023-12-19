@@ -1,23 +1,27 @@
 <div class="container">
     <div class="user-profile">
+    <div class="profile-pic mt-4">
+            <h3>Profile Picture</h3>
+            <!-- Display profile picture or placeholder -->
+            <p>
+                <img src="images/avatar.jpg" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 150px;">
+            </p>
+            <!-- Option to update profile picture -->
+            <button class="btn btn-secondary">Update</button>
+        </div>
         <div class="username mt-4">
             <h3>Username</h3>
-            <p>Username: <span>{{username}}</span></p>
+            <p>Username: LoggedIn User<span>{{username}}</span></p>
             <!-- Option to edit username -->
             <button class="btn btn-secondary">Edit</button>
         </div>
         <div class="location mt-4">
             <h3>Location</h3>
-            <p>Location: <span>{{location}}</span></p>
+            <p>Location: Pamplemousses, Mauritius<span>{{location}}</span></p>
             <!-- Option to change location -->
             <button class="btn btn-secondary">Change</button>
         </div>
-        <div class="profile-pic mt-4">
-            <h3>Profile Picture</h3>
-            <!-- Display profile picture -->
-            <p><img src="{{profilePicURL}}" alt="Profile Picture" class="img-fluid rounded-circle"></p>
-            <!-- Option to update profile picture -->
-            <button class="btn btn-secondary">Update</button>
-        </div>
+        
+        <!-- Additional profile parts can be added here -->
     </div>
 </div>
